@@ -1,4 +1,7 @@
-body {
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* body {
   background-color: #020420;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
@@ -11,4 +14,4 @@ h5,
 h6 {
   font-family: "Montserrat", sans-serif;
   color: #00dc82;
-}
+} */
