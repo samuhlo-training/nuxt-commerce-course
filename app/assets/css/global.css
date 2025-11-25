@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+@theme {
+  /* --color-primary: #00dc82; */
+  --radius: 0.5rem;
+}
+
 /* body {
   background-color: #020420;
   color: #ffffff;
