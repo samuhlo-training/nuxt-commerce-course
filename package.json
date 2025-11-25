@@ -15,6 +15,9 @@
     "@nuxt/icon": "2.1.0",
     "@nuxt/image": "2.0.0",
     "@nuxt/ui": "^4.2.1",
+    "@nuxtjs/color-mode": "^4.0.0",
+    "@prisma/client": "6.19.0",
+    "@prisma/nuxt": "^0.3.0",
     "eslint": "^9.39.1",
     "nuxt": "^4.2.1",
     "tailwindcss": "^4.1.17",
@@ -24,6 +27,9 @@
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.75",
-    "@iconify-json/simple-icons": "^1.2.60"
+    "@iconify-json/simple-icons": "^1.2.60",
+    "@types/node": "^24.10.1",
+    "nuxi": "^3.30.0",
+    "prisma": "6.19.0"
   }
 }
