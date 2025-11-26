@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui';
 
-const { data } = await useFetch('/api/hello-world');
+const { data } = await useFetch('/api/home/cta-info');
 
 
 const links = ref<ButtonProps[]>([
