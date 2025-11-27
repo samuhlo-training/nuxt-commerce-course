@@ -1,75 +1,51 @@
-# Nuxt Minimal Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+## 📦 Instalación
 
-Make sure to install dependencies:
+1. **Clona el repositorio:**
+   ```bash
+   git clone <url-del-repositorio>
+   cd 02-mi-sitio
+   ```
 
-```bash
-# npm
-npm install
+2. **Instala las dependencias:**
+   ```bash
+   pnpm install
+   ```
 
-# pnpm
-pnpm install
+## ⚙️ Configuración
 
-# yarn
-yarn install
+3. **Configura las variables de entorno:**
+   - Copia el archivo `.env.template` a `.env`
+   - Completa las variables necesarias (como la URL de la base de datos, claves de API, etc.)
 
-# bun
-bun install
-```
+4. **Aplica las migraciones de la base de datos:**
+   ```bash
+   npx prisma migrate dev
+   ```
 
-## Development Server
+5. **Ejecuta el seed para poblar la base de datos:**
+   ```bash
+   pnpm seed
+   ```
 
-Start the development server on `http://localhost:3000`:
+## ▶️ Uso
 
-```bash
-# npm
-npm run dev
+6. **Inicia el servidor de desarrollo:**
+   ```bash
+   pnpm dev
+   ```
 
-# pnpm
-pnpm dev
+   El sitio estará disponible en `http://localhost:3000`.
 
-# yarn
-yarn dev
+## 📜 Scripts Disponibles
 
-# bun
-bun run dev
-```
+- `pnpm dev`: Inicia el servidor de desarrollo
+- `pnpm build`: Construye la aplicación para producción
+- `pnpm preview`: Previsualiza la build de producción
+- `pnpm seed`: Ejecuta el script de seed para la base de datos
+- `pnpm prisma studio`: Abre Prisma Studio para gestionar la base de datos
 
-## Production
 
-Build the application for production:
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+¡Disfruta desarrollando con este proyecto! 🎉

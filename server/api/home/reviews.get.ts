@@ -1,7 +1,7 @@
 import prisma from "../../../lib/prisma";
 
 export default defineEventHandler(async (event) => {
-  const reviews = await prisma.siteReview.findMany({
+  const reviews = await prisma.siteReviews.findMany({
     take: 6,
     orderBy: { createdAt: "desc" },
     select: {

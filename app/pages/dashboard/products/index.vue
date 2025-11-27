@@ -13,102 +13,94 @@
             <UButton icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
         </div>
 
-        <UTable :data="data" :columns="columns" class="flex-1" />
+        <UTable :loading="status !== 'success'" :data="products" :columns="columns" class="flex-1" />
     </div>
+    <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
 </template>
 
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
 const UBadge = resolveComponent('UBadge');
-type Payment = {
-    id: string;
-    date: string;
-    status: 'paid' | 'failed' | 'refunded';
-    email: string;
-    amount: number;
-};
-const data = ref<Payment[]>([
-    {
-        id: '4600',
-        date: '2024-03-11T15:30:00',
-        status: 'paid',
-        email: 'james.anderson@example.com',
-        amount: 594,
-    },
-    {
-        id: '4599',
-        date: '2024-03-11T10:10:00',
-        status: 'failed',
-        email: 'mia.white@example.com',
-        amount: 276,
-    },
-    {
-        id: '4598',
-        date: '2024-03-11T08:50:00',
-        status: 'refunded',
-        email: 'william.brown@example.com',
-        amount: 315,
-    },
-    {
-        id: '4597',
-        date: '2024-03-10T19:45:00',
-        status: 'paid',
-        email: 'emma.davis@example.com',
-        amount: 529,
-    },
-    {
-        id: '4596',
-        date: '2024-03-10T15:55:00',
-        status: 'paid',
-        email: 'ethan.harris@example.com',
-        amount: 639,
-    },
-]);
-const columns: TableColumn<Payment>[] = [
+
+const { products, total, currentPage, perPage, status } = await usePaginatedProducts();
+
+
+
+
+const columns: TableColumn<Product>[] = [
     {
         accessorKey: 'id',
         header: '#',
         cell: ({ row }) => `#${row.getValue('id')}`,
     },
+
+
     {
-        accessorKey: 'date',
-        header: 'Date',
+        accessorKey: 'images',
+        header: 'Imagen',
         cell: ({ row }) => {
-            return new Date(row.getValue('date')).toLocaleString('en-US', {
-                day: 'numeric',
-                month: 'short',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-            });
+            const images = row.getValue('images') as string[];
+            if (images && images.length > 0) {
+                return h('img', { src: images[0], class: 'w-12 h-12 rounded-md object-cover' });
+            } else {
+                return h('span', { class: 'text-gray-600' }, 'No image');
+            }
         },
     },
     {
-        accessorKey: 'status',
-        header: 'Status',
+        accessorKey: 'name',
+        header: 'Nombre',
+    },
+    {
+        accessorKey: 'description',
+        header: 'Descripción',
         cell: ({ row }) => {
-            const color = {
-                paid: 'success' as const,
-                failed: 'error' as const,
-                refunded: 'neutral' as const,
-            }[row.getValue('status') as string];
-            return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-                row.getValue('status')
+            return h(
+                'div',
+                {
+                    class: 'truncate-text whitespace-normal break-words max-w-[350px] ',
+                },
+                String(row.getValue('description')).slice(0, 50) + '...'
             );
         },
     },
     {
-        accessorKey: 'email',
-        header: 'Email',
+        accessorKey: 'price',
+        header: 'Precio',
+        cell: ({ row }) => {
+            const amount = Number.parseFloat(row.getValue('price'));
+            return formatCurrency(amount);
+
+        },
     },
     {
-        accessorKey: 'amount',
-        header: () => h('div', { class: 'text-right' }, 'Amount'),
+        accessorKey: 'tags',
+        header: 'Etiquetas',
         cell: ({ row }) => {
-            const amount = Number.parseFloat(row.getValue('amount'));
-            const formatted = formatCurrency(amount);
-            return h('div', { class: 'text-right font-medium' }, formatted);
+            const tags = row.getValue('tags') as string[] | undefined;
+            if (!tags || tags.length === 0) {
+                return h('div', { class: 'flex-1 text-gray-600' }, 'Sin etiquetas');
+            }
+            return h(
+                'div',
+                { class: 'flex  flex-wrap gap-2' },
+                tags.map((tag) =>
+                    h(UBadge, { key: tag, color: 'secondary', size: 'md', variant: 'subtle', class: 'mr-0.5' }, () => tag)
+                )
+            );
+        },
+    },
+    {
+        accessorKey: 'createdAt',
+        header: () => h('div', { class: 'text-right' }, 'Creado'),
+        cell: ({ row }) => {
+            const date = new Date(row.getValue('createdAt')).toLocaleString('es-ES', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+            });
+            return h('div', { class: 'text-right font-medium' }, date);
         },
     },
 ];
