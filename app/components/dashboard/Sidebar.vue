@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// https://ui.nuxt.com/docs/components/dashboard-sidebar
+const {user} = useAuthentication()
 import {
     type CommandPaletteGroup,
     type CommandPaletteItem,
@@ -76,8 +76,11 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
 <template>
     <UDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-default' }">
         <template #header="{ collapsed }" class="flex items-center gap-2">
-            <UDashboardSidebarCollapse variant="subtle" />
-            <IconsNuxtui class="h-6 w-auto" v-if="!collapsed" />
+            <NuxtLink to="/" class="flex flex-row items-center justify-center">
+
+                <UDashboardSidebarCollapse variant="subtle" class="mr-2" />
+                <IconsNuxtui class="h-6 w-auto" v-if="!collapsed" />
+            </NuxtLink>
         </template>
 
         <template #default="{ collapsed }">
@@ -112,7 +115,7 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
         <template #footer="{ collapsed }">
             <UButton :avatar="{
                 src: 'https://github.com/benjamincanac.png',
-            }" :label="collapsed ? undefined : 'Benjamin'" color="neutral" variant="ghost" class="w-full"
+            }" :label="collapsed ? undefined : user?.name" color="neutral" variant="ghost" class="w-full"
                 :block="collapsed" />
         </template>
     </UDashboardSidebar>

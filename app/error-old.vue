@@ -12,7 +12,7 @@
         <div class="error-message">
           <h2>{{ $props.error.message || 'Error' }}</h2>
           <p>
-            {{ $props.error.data?.myOtherField || 'Lo sentimos, la página que buscas no se pudo encontrar.' }}
+          {{ errorData?.myOtherField || 'Lo sentimos, la página que buscas no se pudo encontrar.' }}
           </p>
         </div>
 
@@ -43,9 +43,16 @@
 
 <script setup lang="ts">
 import type { NuxtError } from '#app';
- defineProps<{
-  error: NuxtError;
+const props = defineProps<{
+  error: NuxtError & { url?: string };
 }>();
+
+interface ErrorData {
+  myOtherField?: string;
+  [key: string]: unknown;
+}
+
+const errorData = computed(() => props.error.data as ErrorData | undefined);
 const isDev = import.meta.dev;
 const router = useRouter();
 const handleError = () => {

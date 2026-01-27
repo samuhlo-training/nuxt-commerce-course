@@ -4,17 +4,27 @@ import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 
 definePageMeta({
-    layout: 'login-layout'
+    layout: 'login-layout',
+    middleware: 'not-athenticated'
 })
 
 const toast = useToast()
+const cookieLoginEmail = useCookie<string | null>('loginEmail', {
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 24 * 30, // 30 dias    
+})
+
+const {login} = useAuthentication()
+const isPosting = ref(false)
+
 
 const fields: AuthFormField[] = [{
     name: 'email',
     type: 'email',
     label: 'Correo electrónico',
     placeholder: 'Ingresa tu correo electrónico',
-    required: true
+    required: true,
+    defaultValue:   cookieLoginEmail.value || ''
 }, {
     name: 'password',
     label: 'Contraseña',
@@ -24,7 +34,8 @@ const fields: AuthFormField[] = [{
 }, {
     name: 'remember',
     label: 'Recordarme',
-    type: 'checkbox'
+    type: 'checkbox',
+    defaultValue: !!cookieLoginEmail.value
 }]
 
 const providers = [{
@@ -43,13 +54,28 @@ const providers = [{
 
 const schema = z.object({
     email: z.email('Correo electrónico inválido'),
-    password: z.string('La contraseña es requerida').min(8, 'Debe tener al menos 8 caracteres')
+    password: z.string('La contraseña es requerida').min(8, 'Debe tener al menos 8 caracteres'),
+    remember: z.boolean().optional()
 })
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-    console.log('Submitted', payload)
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+    const {email, password, remember} = payload.data
+    isPosting.value = true
+    if(remember){
+        cookieLoginEmail.value = email
+    }else{
+        cookieLoginEmail.value = null
+    }
+    const success = await login(email, password)
+    if(success){
+        toast.add({ title: 'Login Success', description: 'Login exitoso' })
+    }else{
+        toast.add({ title: 'Login Error', description: 'Las credenciales son incorrectas' })
+    }
+    isPosting.value = false
+  
 }
 </script>
 

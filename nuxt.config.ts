@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@prisma/nuxt",
+    "nuxt-auth-utils",
   ],
 
   // additional config
