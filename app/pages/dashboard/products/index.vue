@@ -10,7 +10,7 @@
                     Gestiona y organiza tu catálogo de productos
                 </p>
             </div>
-            <UButton icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
+            <UButton to="/dashboard/product/new" icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
         </div>
 
         <UTable :loading="status !== 'success'" :data="products" :columns="columns" class="flex-1" />
@@ -22,6 +22,7 @@
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
 const UBadge = resolveComponent('UBadge');
+const NuxtLink = resolveComponent('NuxtLink');
 
 const { products, total, currentPage, perPage, status } = await usePaginatedProducts();
 
@@ -51,6 +52,14 @@ const columns: TableColumn<Product>[] = [
     {
         accessorKey: 'name',
         header: 'Nombre',
+        cell: ({ row }) => {
+            const productName = row.getValue('name');
+            const productId = row.getValue('id');
+            return h(NuxtLink, {
+                to: `/dashboard/product/${productId}`,
+                class: 'text-yellow-500 hover:text-yellow-700 underline cursor-pointer',
+            }, () => productName);
+        },
     },
     {
         accessorKey: 'description',

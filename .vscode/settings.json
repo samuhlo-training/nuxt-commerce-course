@@ -10,5 +10,17 @@
     ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "prisma.pinToPrisma6": true,
+
+  "workbench.colorCustomizations": {
+    "statusBarItem.remoteBackground": "#FFD13C",
+    "statusBarItem.remoteHoverBackground": "#1e1e1e",
+    "statusBarItem.remoteHoverForeground": "#FFD13C",
+    "statusBarItem.remoteForeground": "#1e1e1e",
+    "gitDecoration.modifiedResourceForeground": "#FFD13C",
+    "editorLineNumber.activeForeground": "#FFD13C",
+    "button.background": "#FFD13C",
+    "button.foreground": "#0A0A0A",
+    "textLink.foreground": "#FFD13C",
+  }
   
 }
