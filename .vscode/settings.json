@@ -9,7 +9,7 @@
   "tailwindCSS.experimental.classRegex": [
     ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "prisma.pinToPrisma6": true,
+ 
 
   "workbench.colorCustomizations": {
     "statusBarItem.remoteBackground": "#FFD13C",

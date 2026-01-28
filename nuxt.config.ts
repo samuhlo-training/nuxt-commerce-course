@@ -23,19 +23,11 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxt/ui",
-    "@prisma/nuxt",
     "nuxt-auth-utils",
   ],
 
-  // additional config
-  vite: {
-    resolve: {
-      alias: {
-        ".prisma/client/index-browser":
-          "./node_modules/.prisma/client/index-browser.js",
-      },
-    },
-  },
+  // Vite config (limpiado para Prisma 7)
+  vite: {},
 
   // SPA - Single Page Application
   // ssr: false,

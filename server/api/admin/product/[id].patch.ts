@@ -1,6 +1,12 @@
 import prisma from "~~/lib/prisma";
 import { z } from "zod";
 
+interface FileData {
+  name: string;
+  type: string;
+  data: Buffer;
+}
+
 const bodySchema = z.object({
   slug: z.string().min(1),
   name: z.string().min(1),
@@ -13,6 +19,7 @@ const bodySchema = z.object({
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id") as string;
   const formData = await readMultipartFormData(event);
+  const files: FileData[] = [];
 
   if (!formData || formData.length === 0) {
     throw createError({
@@ -23,6 +30,8 @@ export default defineEventHandler(async (event) => {
   }
 
   //Procesar los archivos
+  console.log({ formData });
+
   let dataString = "";
 
   for (const part of formData) {
@@ -30,8 +39,15 @@ export default defineEventHandler(async (event) => {
       dataString = part.data.toString("utf-8");
       console.log({ dataString });
     }
+    //Leer archivos
+    if (part.name === "files" && part.filename) {
+      files.push({
+        name: part.filename,
+        type: part.type || "application/octet-stream",
+        data: part.data,
+      });
+    }
   }
-  //Leer archivos
 
   const body = bodySchema.safeParse(JSON.parse(dataString));
 
@@ -58,6 +74,18 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // Enviar los archivos al Cloud
+  if (files.length > 0) {
+    const uploadFiles = await Promise.all(
+      files.map(async (file) => {
+        const url = await fileUpload(file.data);
+        return url;
+      }),
+    );
+    body.data.images = [...body.data.images, ...uploadFiles];
+    //body.data.images = body.data.images.concat(uploadFiles)
+  }
+
   const updateProduct = await prisma.product.update({
     where: {
       id: +id,
@@ -68,6 +96,5 @@ export default defineEventHandler(async (event) => {
   return {
     message: "Producto actualizado correctamente",
     product: updateProduct,
-    files: [],
   };
 });
