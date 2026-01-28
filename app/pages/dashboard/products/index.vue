@@ -25,6 +25,10 @@ const UBadge = resolveComponent('UBadge');
 const NuxtLink = resolveComponent('NuxtLink');
 
 const { products, total, currentPage, perPage, status } = await usePaginatedProducts();
+definePageMeta({
+    breadcrumbName: 'Productos',
+    icon: 'i-lucide-box',
+})
 
 
 

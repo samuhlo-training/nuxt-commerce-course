@@ -1,36 +1,123 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import { z } from 'zod';
+
+const router = useRouter();
 const route = useRoute();
+const toast = useToast();
 
-//variables
-const rawId = route.params.id as string;
-
-const {data: product, error,pending,createOrUpdate} = await useAdminProduct(rawId);
-
-if(error.value){
-    await navigateTo('/404');
+const messageQuery = route.query.message as string;
+if (messageQuery) {
+  toast.add({
+    title: 'Producto creado',
+    description: messageQuery,
+  });
+  router.replace({ query: {} });
 }
 
-const isCreating = computed(()=>rawId === 'new')
+// Variables
+const rawId = route.params.id as string;
 
-const newProduct = ref<Product | null>({...product.value} as Product);
+const {
+  data: product,
+  error,
+  pending,
+  createOrUpdate,
+} = await useAdminProduct(rawId);
+
+if (error.value) {
+  await navigateTo('/404');
+}
+
+const isCreating = computed(() => rawId === 'new');
+
+const newProduct = ref<Product | null>({ ...product.value } as Product);
 const selectedImageIndex = ref(0);
 const isSubmitting = ref(false);
 const fieldErrors = ref<Record<string, string>>({});
-const pageTitle = computed(()=> isCreating.value ? 'Crear producto' : 'Editar producto')
-const subtitle = computed(()=> isCreating.value ? 'Completa el formulario para agregar un nuevo prodcuto' : 'Modifica los datos del producto seleccionado')
+
+const pageTitle = computed(() =>
+  isCreating.value ? 'Crear producto' : 'Editar producto'
+);
+const subtitle = computed(() =>
+  isCreating.value
+    ? 'Completa el formulario para agregar un nuevo producto'
+    : 'Actualiza la in formación del producto seleccionado'
+);
+
+const productSchema = z.object({
+  slug: z.string().nonempty('El Slug es requerido'),
+  name: z.string().nonempty('El nombre es requerido'),
+  description: z.string().nonempty('La descripción es requerida'),
+  price: z.number().min(0, 'El precio es requerido'),
+});
+
+const checkValidations = () => {
+  fieldErrors.value = {};
+
+  const result = productSchema.safeParse(newProduct.value);
+
+  if (!result.success) {
+    result.error.issues.forEach((issue) => {
+      const field = issue.path[0];
+
+      if (typeof field === 'string') {
+        fieldErrors.value[field] = issue.message;
+      }
+    });
+
+    return false;
+  }
+
+  // Si quieres, aquí puedes sobreescribir newProduct con los valores parseados
+  // newProduct.value = result.data;
+
+  return true;
+};
 
 const handleSubmit = async () => {
-    console.log({newProduct : newProduct.value})
-}
+  const isFormValid = checkValidations();
+  if (!isFormValid) {
+    return;
+  }
+  if (!newProduct.value) return;
+
+  newProduct.value!.tags = `${newProduct.value!.tags}`.split(',');
+
+  console.log(newProduct.value);
+  const product = await createOrUpdate(newProduct.value);
+
+  if (isCreating.value) {
+    // navigateTo
+    router.replace(
+      `/dashboard/product/${product.id}?message=Producto creado correctamente`
+    );
+    return;
+  }
+
+  // TODO: limpiar los archivos seleccionados
+
+  toast.add({
+    title: 'Producto actualizado correctamente',
+    description: `El producto ${product.name}, ha sido actualizado correctamente`,
+  });
+};
 
 const handleCancel = () => {
-    navigateTo('/admin/products')
-}
+  navigateTo('/dashboard/products');
+};
 
+watch(
+  newProduct,
+  () => {
+    checkValidations();
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
 <template>
-  <template>
   <div class="mx-auto max-w-4xl space-y-8">
     <section class="space-y-1">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
@@ -70,15 +157,15 @@ const handleCancel = () => {
               v-model="newProduct.slug"
               type="text"
               :class="[
-                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent border-2 dark:text-gray-100',
                 fieldErrors.slug
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+                  ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                  : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
               ]"
               placeholder="ejemplo-producto"
               autocomplete="off"
             />
-            <p v-if="fieldErrors.slug" class="text-sm text-red-600">
+            <p v-if="fieldErrors.slug" class="text-sm text-pink-600">
               {{ fieldErrors.slug }}
             </p>
           </div>
@@ -95,15 +182,15 @@ const handleCancel = () => {
               v-model="newProduct.name"
               type="text"
               :class="[
-                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent border-2 dark:text-gray-100',
                 fieldErrors.name
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+                  ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                  : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
               ]"
               placeholder="Nombre del producto"
               autocomplete="off"
             />
-            <p v-if="fieldErrors.name" class="text-sm text-red-600">
+            <p v-if="fieldErrors.name" class="text-sm text-pink-600">
               {{ fieldErrors.name }}
             </p>
           </div>
@@ -121,142 +208,143 @@ const handleCancel = () => {
             v-model="newProduct.description"
             rows="4"
             :class="[
-              'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+              'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent border-2 dark:text-gray-100',
               fieldErrors.description
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+                ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
             ]"
             placeholder="Describe el producto con claridad..."
           />
-          <!-- <UInput
-              type="file"
-              multiple
-              id="product-images"
-              rows="4"
-              :class="[
-                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
-                fieldErrors.imagesInput
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
-              ]"
-            /> -->
-          <p v-if="fieldErrors.description" class="text-sm text-red-600">
+          <p v-if="fieldErrors.description" class="text-sm text-pink-600">
             {{ fieldErrors.description }}
           </p>
         </div>
-
+        
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div class="space-y-4">
             <div class="space-y-2">
               <label
-                class="text-sm font-medium text-gray-700 dark:text-gray-200"
-                for="product-price"
+              class="text-sm font-medium text-gray-700 dark:text-gray-200"
+              for="product-price"
               >
-                Precio (entero)
-              </label>
-              <input
-                id="product-price"
-                v-model="newProduct.price"
-                type="number"
-                min="0"
-                step="1"
-                :class="[
-                  'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+              Precio (entero)
+            </label>
+            <input
+            id="product-price"
+            v-model="newProduct.price"
+            type="number"
+            min="0"
+            step="1"
+            :class="[
+                  'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent border-2 dark:text-gray-100',
                   fieldErrors.price
-                    ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                    : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+                    ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                    : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
                 ]"
                 placeholder="0"
-              />
-              <p v-if="fieldErrors.price" class="text-sm text-red-600">
-                {{ fieldErrors.price }}
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <label
+                />
+                <p v-if="fieldErrors.price" class="text-sm text-pink-600">
+                  {{ fieldErrors.price }}
+                </p>
+              </div>
+              
+              <div class="space-y-2">
+                <label
                 class="text-sm font-medium text-gray-700 dark:text-gray-200"
                 for="product-tags"
-              >
+                >
                 Etiquetas
               </label>
               <input
-                id="product-tags"
-                v-model="newProduct.tags"
-                type="text"
-                :class="[
-                  'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+              id="product-tags"
+              v-model="newProduct.tags"
+              type="text"
+              :class="[
+                  'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent border-2 dark:text-gray-100',
                   fieldErrors.tagsInput
-                    ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                    : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+                    ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                    : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
                 ]"
                 placeholder="etiqueta uno, etiqueta dos"
                 autocomplete="off"
-              />
-              <p class="text-sm text-gray-500 dark:text-gray-400">
-                Ingresa etiquetas separadas por comas.
-              </p>
-              <p v-if="fieldErrors.tagsInput" class="text-sm text-red-600">
-                {{ fieldErrors.tagsInput }}
-              </p>
+                />
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Ingresa etiquetas separadas por comas.
+                </p>
+                <p v-if="fieldErrors.tagsInput" class="text-sm text-pink-600">
+                  {{ fieldErrors.tagsInput }}
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div class="space-y-3">
-            <label
+            
+            <div class="space-y-3">
+              <label
               class="text-sm font-medium text-gray-700 dark:text-gray-200"
               for="product-images"
-            >
+              >
               Imágenes
             </label>
             <div v-if="newProduct.images.length > 0" class="space-y-3">
               <div
-                class="overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800"
+              class="overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800"
               >
-                <img
-                  :src="newProduct.images[selectedImageIndex]"
-                  alt="Previsualización principal del producto"
-                  class="h-64 w-full object-cover"
-                />
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <button
-                  v-for="(image, index) in newProduct.images"
-                  :key="image + index"
-                  type="button"
-                  class="overflow-hidden rounded-md border-2 transition"
-                  :class="
+              <img
+              :src="newProduct.images[selectedImageIndex]"
+              alt="Previsualización principal del producto"
+              class="h-64 w-full object-cover"
+              />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button
+              v-for="(image, index) in newProduct.images"
+              :key="image + index"
+              type="button"
+              class="overflow-hidden rounded-md border-2 transition"
+              :class="
                     selectedImageIndex === index
-                      ? 'border-blue-500'
+                      ? 'border-slate-500'
                       : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'
                   "
                   @click="selectedImageIndex = index"
-                >
+                  >
                   <img
-                    :src="image"
-                    :alt="`Previsualización ${index + 1}`"
-                    class="h-20 w-full object-cover"
-                    loading="lazy"
+                  :src="image"
+                  :alt="`Previsualización ${index + 1}`"
+                  class="h-20 w-full object-cover"
+                  loading="lazy"
                   />
                 </button>
               </div>
             </div>
-            <textarea
-              id="product-images"
-              v-model="newProduct.images"
-              rows="4"
-              :class="[
-                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
-                fieldErrors.imagesInput
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
-              ]"
-              placeholder="https://ejemplo.com/imagen-1.jpg"
-            />
+            <UInput
+            v-if="!isCreating"
+                type="file"
+                multiple
+                id="product-images"
+                rows="4"
+                :class="[
+                  'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-transparent dark:text-gray-100',
+                  fieldErrors.imagesInput
+                    ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+                    : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
+                ]"
+              />
+            <!-- <textarea
+            id="product-images"
+            v-model="newProduct.images"
+            rows="4"
+            :class="[
+            'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+            fieldErrors.imagesInput
+            ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-500'
+            : 'border-gray-300 focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700',
+            ]"
+            placeholder="https://ejemplo.com/imagen-1.jpg"
+            /> -->
             <p class="text-sm text-gray-500 dark:text-gray-400">
               Ingresa una URL por línea.
             </p>
-            <p v-if="fieldErrors.imagesInput" class="text-sm text-red-600">
+            <p v-if="fieldErrors.imagesInput" class="text-sm text-pink-600">
               {{ fieldErrors.imagesInput }}
             </p>
           </div>
@@ -286,7 +374,7 @@ const handleCancel = () => {
 
       <section
         v-if="!isCreating && product"
-        class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+        class="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-transparent"
       >
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
           Metadatos
@@ -312,5 +400,4 @@ const handleCancel = () => {
       </section>
     </div>
   </div>
-</template>
 </template>

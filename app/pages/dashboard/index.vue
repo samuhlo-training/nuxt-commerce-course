@@ -1,3 +1,9 @@
+<script setup lang="ts">
+definePageMeta({
+    breadcrumbName: 'Dashboard',
+    icon: 'i-lucide-layout-dashboard',
+})
+</script>
 <template>
     <div class="space-y-6">
         <!-- Header -->
