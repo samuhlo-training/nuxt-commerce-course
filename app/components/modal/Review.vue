@@ -1,20 +1,39 @@
 <script setup lang="ts">
-defineProps<{
+import type { User } from '#auth-utils';
+import type { ProductReview } from '../../../prisma/generated/prisma/browser';
+
+
+const props = defineProps<{
     buttonLabel: string;
+    slug: string;
+    user: User | null;
 }>();
-const reviewText = ref('');
-const rating = ref(0);
-const isOpen = ref(false);
-const submitReview = () => {
-    console.log('submitReview');
-    isOpen.value = false;
+
+const emit = defineEmits<{
+    (e: 'review-posted', review: ProductReview): void;
+}>();
+
+const {
+    isOpen,
+    reviewText,
+    userTitle,
+    rating,
+    handleModalClose,
+    submitReview: submitReviewApi
+} = useModalReview();
+
+const submitReview = async () => {
+    const review = await submitReviewApi(props.slug);
+    if (review) {
+        emit('review-posted', review);
+    }
 };
 </script>
 
 <template>
     <UButton :label="buttonLabel" color="primary" variant="subtle" @click="isOpen = true" />
 
-    <UModal v-model:open="isOpen" :dismissible="true" title="Añadir reseña"
+    <UModal v-model:open="isOpen" :dismissible="true" @update:open="handleModalClose" title="Añadir reseña"
         description="Deja tu reseña sobre el producto.">
 
         <template #content>
@@ -33,6 +52,12 @@ const submitReview = () => {
                                 :class="{ 'text-yellow-500': rating >= star }" v-for="star in 5" :key="star"
                                 @click="rating = star" />
                         </div>
+                    </div>
+                    <div class="col-span-1">
+                        <UInput :model-value="user?.name" class="w-full" disabled />
+                    </div>
+                    <div class="col-span-1">
+                        <UInput v-model="userTitle" placeholder="Título del usuario" class="w-full" :rows="6" />
                     </div>
 
                     <div class="col-span-1">

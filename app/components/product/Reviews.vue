@@ -6,7 +6,18 @@ const props = defineProps({
         required: true,
     },
 });
+
+const {isLoggedIn, user} = useAuthentication();
 const { data, status, refresh } = useFetch(`/api/product/${props.slug}/reviews`,{server:false, lazy:true});
+
+const hasUserPostedReview = computed(() => {
+   
+    return data.value?.hasUserPostedReview;
+});
+
+const handleReviewPosted = () => {
+    console.log('Review posted');
+};
 
 
 
@@ -16,6 +27,7 @@ const { data, status, refresh } = useFetch(`/api/product/${props.slug}/reviews`,
 </script>
 
 <template>
+    <ClientOnly>
     <UCard class="mb-8" icon="i-lucide-star">
         <div class="flex items-center justify-between gap-3">
             <div class="flex items-center gap-3">
@@ -34,7 +46,7 @@ const { data, status, refresh } = useFetch(`/api/product/${props.slug}/reviews`,
         class="ml-4"
         label="Añadir reseña"
       /> -->
-            <ModalReview button-label="Añadir reseña" />
+            <ModalReview v-if="!hasUserPostedReview && isLoggedIn" @review-posted="handleReviewPosted" :slug="slug" :user="user" button-label="Añadir reseña" />
         </div>
     </UCard>
 
@@ -62,4 +74,5 @@ const { data, status, refresh } = useFetch(`/api/product/${props.slug}/reviews`,
             </template>
         </UPageCard>
     </UPageColumns>
+    </ClientOnly>
 </template>
