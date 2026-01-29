@@ -384,8 +384,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  SiteReviews: 'SiteReviews',
+  SiteReview: 'SiteReview',
   Product: 'Product',
+  ProductReview: 'ProductReview',
   User: 'User'
 } as const
 
@@ -402,81 +403,81 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "siteReviews" | "product" | "user"
+    modelProps: "siteReview" | "product" | "productReview" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    SiteReviews: {
-      payload: Prisma.$SiteReviewsPayload<ExtArgs>
-      fields: Prisma.SiteReviewsFieldRefs
+    SiteReview: {
+      payload: Prisma.$SiteReviewPayload<ExtArgs>
+      fields: Prisma.SiteReviewFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.SiteReviewsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload> | null
+          args: Prisma.SiteReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.SiteReviewsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         findFirst: {
-          args: Prisma.SiteReviewsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload> | null
+          args: Prisma.SiteReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.SiteReviewsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         findMany: {
-          args: Prisma.SiteReviewsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>[]
+          args: Prisma.SiteReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>[]
         }
         create: {
-          args: Prisma.SiteReviewsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         createMany: {
-          args: Prisma.SiteReviewsCreateManyArgs<ExtArgs>
+          args: Prisma.SiteReviewCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.SiteReviewsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>[]
+          args: Prisma.SiteReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>[]
         }
         delete: {
-          args: Prisma.SiteReviewsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         update: {
-          args: Prisma.SiteReviewsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         deleteMany: {
-          args: Prisma.SiteReviewsDeleteManyArgs<ExtArgs>
+          args: Prisma.SiteReviewDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.SiteReviewsUpdateManyArgs<ExtArgs>
+          args: Prisma.SiteReviewUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.SiteReviewsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>[]
+          args: Prisma.SiteReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>[]
         }
         upsert: {
-          args: Prisma.SiteReviewsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewsPayload>
+          args: Prisma.SiteReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteReviewPayload>
         }
         aggregate: {
-          args: Prisma.SiteReviewsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSiteReviews>
+          args: Prisma.SiteReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSiteReview>
         }
         groupBy: {
-          args: Prisma.SiteReviewsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SiteReviewsGroupByOutputType>[]
+          args: Prisma.SiteReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteReviewGroupByOutputType>[]
         }
         count: {
-          args: Prisma.SiteReviewsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SiteReviewsCountAggregateOutputType> | number
+          args: Prisma.SiteReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteReviewCountAggregateOutputType> | number
         }
       }
     }
@@ -551,6 +552,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProductCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProductReview: {
+      payload: Prisma.$ProductReviewPayload<ExtArgs>
+      fields: Prisma.ProductReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProductReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProductReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.ProductReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProductReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        findMany: {
+          args: Prisma.ProductReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>[]
+        }
+        create: {
+          args: Prisma.ProductReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        createMany: {
+          args: Prisma.ProductReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProductReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.ProductReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        update: {
+          args: Prisma.ProductReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProductReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProductReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProductReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProductReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.ProductReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProductReview>
+        }
+        groupBy: {
+          args: Prisma.ProductReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProductReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductReviewCountAggregateOutputType> | number
         }
       }
     }
@@ -667,7 +742,7 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const SiteReviewsScalarFieldEnum = {
+export const SiteReviewScalarFieldEnum = {
   id: 'id',
   name: 'name',
   subtitle: 'subtitle',
@@ -676,7 +751,7 @@ export const SiteReviewsScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type SiteReviewsScalarFieldEnum = (typeof SiteReviewsScalarFieldEnum)[keyof typeof SiteReviewsScalarFieldEnum]
+export type SiteReviewScalarFieldEnum = (typeof SiteReviewScalarFieldEnum)[keyof typeof SiteReviewScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -692,6 +767,21 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  review: 'review',
+  name: 'name',
+  userTitle: 'userTitle',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  productId: 'productId',
+  userId: 'userId'
+} as const
+
+export type ProductReviewScalarFieldEnum = (typeof ProductReviewScalarFieldEnum)[keyof typeof ProductReviewScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -879,8 +969,9 @@ export type PrismaClientOptions = ({
   comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
-  siteReviews?: Prisma.SiteReviewsOmit
+  siteReview?: Prisma.SiteReviewOmit
   product?: Prisma.ProductOmit
+  productReview?: Prisma.ProductReviewOmit
   user?: Prisma.UserOmit
 }
 

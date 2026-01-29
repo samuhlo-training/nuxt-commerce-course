@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "seed": "ts-node seed/seed-database.ts"
+    "seed": "bun seed/seed-database.ts"
   },
   "dependencies": {
     "@nuxt/eslint": "1.10.0",

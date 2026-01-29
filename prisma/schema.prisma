@@ -10,7 +10,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model SiteReviews {
+model SiteReview {
   id           Int      @id @default(autoincrement())
   name         String
   subtitle     String
@@ -29,14 +29,39 @@ model Product {
   tags        String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  productReviews ProductReview[]
+}
+
+model ProductReview {
+  id        Int    @id @default(autoincrement())
+  rating    Int
+  review    String
+  name      String
+  userTitle String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String
-  roles     String[]
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  name     String
+  roles    String[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relaciones
+  productReviews ProductReview[]
 }

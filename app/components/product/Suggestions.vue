@@ -18,5 +18,5 @@ const { data: productSuggestions, status } = useLazyFetch<Product[]>(`/api/produ
         <USkeleton class="w-full h-52 rounded-md mb-4" />
         <USkeleton class="w-full h-52 rounded-md mb-4" />
     </div>
-    <ProductsGrid v-else :products="productSuggestions || []" />
+    <ProductsGrid v-else :products="productSuggestions || []"  />
 </template>

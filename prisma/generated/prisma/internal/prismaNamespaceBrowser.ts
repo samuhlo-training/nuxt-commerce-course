@@ -51,8 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  SiteReviews: 'SiteReviews',
+  SiteReview: 'SiteReview',
   Product: 'Product',
+  ProductReview: 'ProductReview',
   User: 'User'
 } as const
 
@@ -72,7 +73,7 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const SiteReviewsScalarFieldEnum = {
+export const SiteReviewScalarFieldEnum = {
   id: 'id',
   name: 'name',
   subtitle: 'subtitle',
@@ -81,7 +82,7 @@ export const SiteReviewsScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type SiteReviewsScalarFieldEnum = (typeof SiteReviewsScalarFieldEnum)[keyof typeof SiteReviewsScalarFieldEnum]
+export type SiteReviewScalarFieldEnum = (typeof SiteReviewScalarFieldEnum)[keyof typeof SiteReviewScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -97,6 +98,21 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  review: 'review',
+  name: 'name',
+  userTitle: 'userTitle',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  productId: 'productId',
+  userId: 'userId'
+} as const
+
+export type ProductReviewScalarFieldEnum = (typeof ProductReviewScalarFieldEnum)[keyof typeof ProductReviewScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

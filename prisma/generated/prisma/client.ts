@@ -30,7 +30,7 @@ export * from "./enums.js"
  * ```
  * const prisma = new PrismaClient()
  * // Fetch zero or more SiteReviews
- * const siteReviews = await prisma.siteReviews.findMany()
+ * const siteReviews = await prisma.siteReview.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,15 +40,20 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model SiteReviews
+ * Model SiteReview
  * 
  */
-export type SiteReviews = Prisma.SiteReviewsModel
+export type SiteReview = Prisma.SiteReviewModel
 /**
  * Model Product
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model ProductReview
+ * 
+ */
+export type ProductReview = Prisma.ProductReviewModel
 /**
  * Model User
  * 

@@ -1,4 +1,3 @@
-import { h } from 'vue';
 <script setup lang="ts">
 const route = useRoute();
 const slug = route.params.slug as string;
@@ -124,7 +123,7 @@ const totalPrice = computed(() => {
         <USeparator class="my-10" icon="i-lucide-box" />
 
         <!-- Reviews -->
-        <ProductReviews />
+        <LazyProductReviews hydrate-on-visible :slug="slug" />
 
         <!-- Related Products Section (optional) -->
         <div v-if="product" class="mt-16 items-center">
@@ -132,7 +131,7 @@ const totalPrice = computed(() => {
                 Productos relacionados
             </h2>
             <!-- <LazyProductsGrid hydrate-on-visible :products="productSuggestions || []" /> -->
-            <LazyProductSuggestions hydrate-on-visible :slug="slug" />
+            <LazyProductSuggestions hydrate-on-visible :slug="slug" class="fade-in" />
         </div>
     </div>
 </template>
