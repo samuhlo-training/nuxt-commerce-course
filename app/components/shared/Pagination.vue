@@ -2,13 +2,13 @@
 /**
  * █ [SHARED] :: PAGINATION
  * =====================================================================
- * DESC:   Pagination component that syncs with URL query params.
- * STATUS: STABLE
+ * DESC:   Componente de paginación que se sincroniza con los parámetros de consulta de la URL.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ CORE: PROPS
+// █ NÚCLEO: PROPS
 // =============================================================================
 defineProps<{
     total: number;
@@ -17,7 +17,7 @@ defineProps<{
 }>();
 
 // =============================================================================
-// █ CORE: DEPENDENCIES & STATE
+// █ NÚCLEO: DEPENDENCIAS Y ESTADO
 // =============================================================================
 const router = useRouter();
 const route = useRoute();
@@ -27,7 +27,7 @@ const currentPage = computed(() => {
 });
 
 // =============================================================================
-// █ INTERACTION: HANDLERS
+// █ INTERACCIÓN: MANEJADORES
 // =============================================================================
 const handlePageUpdate = (page: number) => {
     router.push({ query: { ...route.query, page: page.toString() } });
@@ -40,7 +40,7 @@ const ui = {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: PAGINATION -->
+    <!-- █ COMPONENTE: PAGINACIÓN -->
     <!-- ======================================================================= -->
     <div class="flex items-center justify-center my-10 ">
         <UPagination :total="total" :page="currentPage" :per-page="perPage" :items-per-page="perPage" show-edges

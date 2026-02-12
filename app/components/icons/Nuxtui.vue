@@ -2,15 +2,15 @@
 /**
  * █ [ICON] :: NUXTUI_LOGO
  * =====================================================================
- * DESC:   SVG Logo for NuxtUI.
- * STATUS: STABLE
+ * DESC:   Logo SVG para NuxtUI.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: SVG LOGO -->
+    <!-- █ COMPONENTE: LOGO SVG -->
     <!-- ======================================================================= -->
     <svg width="1020" height="200" viewBox="0 0 1020 200" fill="none" xmlns="http://www.w3.org/2000/svg"
         class="w-auto h-6 shrink-0">

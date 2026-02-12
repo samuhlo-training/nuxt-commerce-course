@@ -2,11 +2,11 @@
 /**
  * █ [LAYOUT] :: DEFAULT
  * =====================================================================
- * DESC:   Default public layout.
- * META:   - Header (Top)
- *         - Main Content (Centered)
- *         - Footer (Bottom)
- * STATUS: STABLE
+ * DESC:   Diseño público predeterminado.
+ * META:   - Encabezado (Arriba)
+ *         - Contenido principal (Centrado)
+ *         - Pie de página (Abajo)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>

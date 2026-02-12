@@ -3,9 +3,9 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: PRODUCT_REVIEWS_LIST
  * =====================================================================
- * DESC:   Get reviews for a product.
- * META:   - Checks if current user has already reviewed
- * STATUS: STABLE
+ * DESC:   Obtiene reseñas para un producto.
+ * META:   - Comprueba si el usuario actual ya ha opinado
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

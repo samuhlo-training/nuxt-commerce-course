@@ -2,17 +2,17 @@
 /**
  * █ [PAGE] :: PRICING
  * =====================================================================
- * DESC:   Pricing information page.
+ * DESC:   Página de información de precios.
  * PATH:   /pricing
- * META:   - Uses PricingTable component
- * STATUS: STABLE
+ * META:   - Usa el componente PricingTable
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: PRICING -->
+    <!-- █ PÁGINA: PRECIOS -->
     <!-- ======================================================================= -->
     <UPageCTA orientation="horizontal" title="Información de precios" description="Descubre nuestros precios y planes.">
         <template #default>
@@ -25,7 +25,7 @@
     <div class="mt-10" />
 
     <!-- ======================================================================= -->
-    <!-- █ PRICING TABLE -->
+    <!-- █ TABLA DE PRECIOS -->
     <!-- ======================================================================= -->
     <PricingTable />
 </template>

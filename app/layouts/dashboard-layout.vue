@@ -2,10 +2,10 @@
 /**
  * █ [LAYOUT] :: DASHBOARD
  * =====================================================================
- * DESC:   Main layout for dashboard pages.
- * META:   - Includes Sidebar, Navbar, and Content Panel
- *         - Persists selection state
- * STATUS: STABLE
+ * DESC:   Diseño principal para las páginas del panel de control.
+ * META:   - Incluye barra lateral, barra de navegación y panel de contenido
+ *         - Persiste el estado de selección
+ * STATUS: ESTABLE
  * =====================================================================
  */
 import { UDashboardGroup, UDashboardPanel } from '#components';

@@ -2,15 +2,15 @@
 /**
  * █ [HOME] :: STACK
  * =====================================================================
- * DESC:   Tech stack marquee display.
- * STATUS: STABLE
+ * DESC:   Pantalla de marquesina de pila tecnológica.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: STACK MARQUEE -->
+    <!-- █ COMPONENTE: MARQUESINA DE STACK -->
     <!-- ======================================================================= -->
     <div>
         <UMarquee>

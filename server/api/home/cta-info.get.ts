@@ -1,9 +1,9 @@
 /**
  * █ [API] :: HOME_CTA_INFO
  * =====================================================================
- * DESC:   Get CTA section information.
- * META:   - Static content (mocked)
- * STATUS: STABLE
+ * DESC:   Obtiene información de la sección CTA.
+ * META:   - Contenido estático (mocked)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler((event) => {

@@ -2,15 +2,15 @@
 /**
  * █ [SHARED] :: FOOTER
  * =====================================================================
- * DESC:   Application footer with navigation links and social icons.
- * STATUS: STABLE
+ * DESC:   Pie de página de la aplicación con enlaces de navegación e iconos sociales.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 // =============================================================================
-// █ CONFIG: FOOTER LINKS
+// █ CONFIG: ENLACES DEL PIE DE PÁGINA
 // =============================================================================
 const items: NavigationMenuItem[] = [{
     label: 'Figma Kit',
@@ -29,7 +29,7 @@ const items: NavigationMenuItem[] = [{
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: FOOTER -->
+    <!-- █ COMPONENTE: PIE DE PÁGINA -->
     <!-- ======================================================================= -->
     <USeparator icon="i-simple-icons-nuxtdotjs" type="solid" class="h-px" />
     <UFooter>

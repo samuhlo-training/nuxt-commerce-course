@@ -2,16 +2,16 @@
 /**
  * █ [PRODUCT] :: REVIEWS_LIST
  * =====================================================================
- * DESC:   Lists all reviews for a specific product.
- *         Includes skeleton loading state and modal integration.
- * STATUS: STABLE
+ * DESC:   Lista todas las reseñas para un producto específico.
+ *         Incluye estado de carga esqueleto e integración modal.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 import { USkeleton } from '../../../.nuxt/components';
 
 // =============================================================================
-// █ CORE: PROPS
+// █ NÚCLEO: PROPS
 // =============================================================================
 const props = defineProps({
     slug: {
@@ -21,20 +21,20 @@ const props = defineProps({
 });
 
 // =============================================================================
-// █ CORE: DEPENDENCIES & STATE
+// █ NÚCLEO: DEPENDENCIAS Y ESTADO
 // =============================================================================
 const { isLoggedIn, user } = useAuthentication();
 const { data, status, refresh } = useFetch(`/api/product/${props.slug}/reviews`, { server: false, lazy: true });
 
 // =============================================================================
-// █ LOGIC: COMPUTED
+// █ LÓGICA: COMPUTADA
 // =============================================================================
 const hasUserPostedReview = computed(() => {
     return data.value?.hasUserPostedReview;
 });
 
 // =============================================================================
-// █ INTERACTION: HANDLERS
+// █ INTERACCIÓN: MANEJADORES
 // =============================================================================
 const handleReviewPosted = () => {
     console.log('Review posted');
@@ -43,12 +43,12 @@ const handleReviewPosted = () => {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: REVIEWS LIST -->
+    <!-- █ COMPONENTE: LISTA DE RESEÑAS -->
     <!-- ======================================================================= -->
     <ClientOnly>
         
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ SECTION: HEADER & ACTION -->
+        <!-- █ SECCIÓN: CABECERA Y ACCIÓN -->
         <!-- ------------------------------------------------------------------- -->
         <UCard class="mb-8" icon="i-lucide-star">
             <div class="flex items-center justify-between gap-3">
@@ -67,7 +67,7 @@ const handleReviewPosted = () => {
         </UCard>
 
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ STATE: LOADING -->
+        <!-- █ ESTADO: CARGANDO -->
         <!-- ------------------------------------------------------------------- -->
         <div v-if="status === 'pending'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <USkeleton class="w-full h-48 rounded-md mb-4" />
@@ -76,7 +76,7 @@ const handleReviewPosted = () => {
         </div>
 
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ STATE: LOADED (LIST) -->
+        <!-- █ ESTADO: CARGADO (LISTA) -->
         <!-- ------------------------------------------------------------------- -->
         <UPageColumns v-else-if="data?.productReviews">
             <UPageCard v-for="(review, index) in data.productReviews" :key="index" variant="subtle"

@@ -5,16 +5,16 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: AUTH_LOGIN
  * =====================================================================
- * DESC:   Handle user login.
- * META:   - Validates email/password with Zod
- *         - Verifies credentials with bcrypt
- *         - Sets user session
- * STATUS: STABLE
+ * DESC:   Maneja el inicio de sesión del usuario.
+ * META:   - Valida correo/contraseña con Zod
+ *         - Verifica credenciales con bcrypt
+ *         - Establece sesión de usuario
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ VALIDATION SCHEMA
+// █ ESQUEMA DE VALIDACIÓN
 // =============================================================================
 const bodySchema = z.object({
   email: z
@@ -29,13 +29,13 @@ const bodySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   // ===========================================================================
-  // █ BODY PARSING
+  // █ ANÁLISIS DEL CUERPO
   // ===========================================================================
 
   const { email, password } = await readValidatedBody(event, bodySchema.parse);
 
   // ===========================================================================
-  // █ LOGIC
+  // █ LÓGICA
   // ===========================================================================
   const user = await prisma.user.findUnique({
     where: {
@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ SESSION
+  // █ SESIÓN
   // ===========================================================================
   await setUserSession(event, {
     user: {
@@ -73,7 +73,7 @@ export default defineEventHandler(async (event) => {
   });
 
   // ===========================================================================
-  // █ RESPONSE
+  // █ RESPUESTA
   // ===========================================================================
   return {
     message: "User logged in successfully",

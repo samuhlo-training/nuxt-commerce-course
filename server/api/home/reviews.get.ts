@@ -3,10 +3,10 @@ import prisma from "../../../lib/prisma";
 /**
  * █ [API] :: HOME_REVIEWS
  * =====================================================================
- * DESC:   Fetch latest site reviews.
- * META:   - Limits to 6 recent reviews
- *         - Selects only display fields
- * STATUS: STABLE
+ * DESC:   Obtiene las últimas reseñas del sitio.
+ * META:   - Limita a 6 reseñas recientes
+ *         - Selecciona solo campos de visualización
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

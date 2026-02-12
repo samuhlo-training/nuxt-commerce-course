@@ -3,10 +3,10 @@
 /**
  * █ [APP] :: ROOT
  * =====================================================================
- * DESC:   Application root component.
- * META:   - Wraps content in UApp (Nuxt UI)
- *         - Use NuxtLayout and NuxtPage for routing
- * STATUS: STABLE
+ * DESC:   Componente raíz de la aplicación.
+ * META:   - Envuelve el contenido en UApp (Nuxt UI)
+ *         - Usa NuxtLayout y NuxtPage para el enrutamiento
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>

@@ -2,22 +2,22 @@
 /**
  * █ [PAGE] :: PRODUCT_DETAIL_PUBLIC
  * =====================================================================
- * DESC:   Public product detail view.
+ * DESC:   Vista pública de detalle de producto.
  * PATH:   /product/:slug
- * META:   - Fetches product by slug using useProduct
- *         - Handle 404 if product not found
- *         - Image gallery and quantity selector
- * STATUS: STABLE
+ * META:   - Obtiene producto por slug usando useProduct
+ *         - Maneja error 404 si no se encuentra el producto
+ *         - Galería de imágenes y selector de cantidad
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ CORE / DEPENDENCIES
+// █ NÚCLEO / DEPENDENCIAS
 // =============================================================================
 const route = useRoute();
 const slug = route.params.slug as string;
 // =============================================================================
-// █ DATA FETCHING
+// █ OBTENCIÓN DE DATOS
 // =============================================================================
 const { product } = await useProduct(slug);
 
@@ -27,7 +27,7 @@ const { product } = await useProduct(slug);
 
 
 // =============================================================================
-// █ ERROR HANDLING
+// █ MANEJO DE ERRORES
 // =============================================================================
 if (!product.value) {
     navigateTo('/404');
@@ -37,7 +37,7 @@ if (!product.value) {
     // });
 }
 // =============================================================================
-// █ STATE & INTERACTION
+// █ ESTADO E INTERACCIÓN
 // =============================================================================
 const selectedImageIndex = ref(0);
 const quantity = ref(1);
@@ -50,7 +50,7 @@ const decreaseQuantity = () => {
     }
 };
 // =============================================================================
-// █ COMPUTED
+// █ COMPUTADO
 // =============================================================================
 const totalPrice = computed(() => {
     return (product.value?.price || 0) * quantity.value;
@@ -59,11 +59,11 @@ const totalPrice = computed(() => {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: PRODUCT_DETAIL_PUBLIC -->
+    <!-- █ PÁGINA: DETALLE_PRODUCTO_PÚBLICO -->
     <!-- ======================================================================= -->
     <div v-if="product" class="container mx-auto px-4 py-8">
         <!-- =================================================================== -->
-        <!-- █ BREADCRUMB -->
+        <!-- █ MIGAS DE PAN -->
         <!-- =================================================================== -->
         <UBreadcrumb class="mb-8" :items="[
             { label: 'Productos', to: '/products' },
@@ -71,7 +71,7 @@ const totalPrice = computed(() => {
         ]" />
 
         <!-- =================================================================== -->
-        <!-- █ PRODUCT DETAIL -->
+        <!-- █ DETALLE DEL PRODUCTO -->
         <!-- =================================================================== -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Images Section -->
@@ -153,12 +153,12 @@ const totalPrice = computed(() => {
         <USeparator class="my-10" icon="i-lucide-box" />
 
         <!-- =================================================================== -->
-        <!-- █ REVIEWS -->
+        <!-- █ RESEÑAS -->
         <!-- =================================================================== -->
         <LazyProductReviews hydrate-on-visible :slug="slug" />
 
         <!-- =================================================================== -->
-        <!-- █ RELATED PRODUCTS -->
+        <!-- █ PRODUCTOS RELACIONADOS -->
         <!-- =================================================================== -->
         <div v-if="product" class="mt-16 items-center">
             <h2 class="text-2xl font-bold text-gray-500 mb-6">

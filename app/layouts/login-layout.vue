@@ -2,9 +2,9 @@
 /**
  * █ [LAYOUT] :: LOGIN
  * =====================================================================
- * DESC:   Centered layout for authentication pages.
- * META:   - Flexbox centering
- * STATUS: STABLE
+ * DESC:   Diseño centrado para páginas de autenticación.
+ * META:   - Centrado con Flexbox
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>

@@ -1,9 +1,9 @@
 /**
  * █ [MIDDLEWARE] :: GUEST_ONLY
  * =====================================================================
- * DESC:   Prevent authenticated users from accessing login/register.
- * META:   - Redirects to / if logged in
- * STATUS: STABLE
+ * DESC:   Evita que usuarios autenticados accedan al login/registro.
+ * META:   - Redirige a / si ha iniciado sesión
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineNuxtRouteMiddleware((to, from) => {

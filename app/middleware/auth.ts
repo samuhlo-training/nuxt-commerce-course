@@ -1,10 +1,10 @@
 /**
  * █ [MIDDLEWARE] :: AUTH
  * =====================================================================
- * DESC:   Protects routes requiring authentication.
- * META:   - Redirects to /login if guest
- *         - Redirects to / if accessing admin area without role
- * STATUS: STABLE
+ * DESC:   Protege rutas que requieren autenticación.
+ * META:   - Redirige a /login si es invitado
+ *         - Redirige a / si accede al área de administración sin rol
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineNuxtRouteMiddleware((to, from) => {

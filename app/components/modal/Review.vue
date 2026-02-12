@@ -2,9 +2,9 @@
 /**
  * █ [MODAL] :: PRODUCT_REVIEW
  * =====================================================================
- * DESC:   Modal to submit a product review.
- *         Handles user input for rating and text.
- * STATUS: STABLE
+ * DESC:   Modal para enviar una reseña de producto.
+ *         Maneja la entrada del usuario para calificación y texto.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
@@ -13,7 +13,7 @@ import type { ProductReview } from '../../../prisma/generated/prisma/browser';
 
 
 // =============================================================================
-// █ CORE: PROPS & EMITS
+// █ NÚCLEO: PROPS Y EMITS
 // =============================================================================
 const props = defineProps<{
     buttonLabel: string;
@@ -26,7 +26,7 @@ const emit = defineEmits<{
 }>();
 
 // =============================================================================
-// █ CORE: COMPOSABLE LOGIC
+// █ NÚCLEO: LÓGICA COMPOSABLE
 // =============================================================================
 const {
     isOpen,
@@ -38,7 +38,7 @@ const {
 } = useModalReview();
 
 // =============================================================================
-// █ INTERACTION: HANDLERS
+// █ INTERACCIÓN: MANEJADORES
 // =============================================================================
 const submitReview = async () => {
     const review = await submitReviewApi(props.slug);
@@ -50,7 +50,7 @@ const submitReview = async () => {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: REVIEW MODAL -->
+    <!-- █ COMPONENTE: MODAL DE RESEÑA -->
     <!-- ======================================================================= -->
     <UButton :label="buttonLabel" color="primary" variant="subtle" @click="isOpen = true" />
 
@@ -60,7 +60,7 @@ const submitReview = async () => {
         <template #content>
             <UContainer class="max-w-2xl mx-auto p-4">
                 <!-- ------------------------------------------------------------------- -->
-                <!-- █ SECTION: HEADER -->
+                <!-- █ SECCIÓN: CABECERA -->
                 <!-- ------------------------------------------------------------------- -->
                 <h2 class="text-xl font-semibold">Añadir reseña</h2>
                 <p class="text-gray-600 text-sm mb-5">
@@ -68,7 +68,7 @@ const submitReview = async () => {
                 </p>
 
                 <!-- ------------------------------------------------------------------- -->
-                <!-- █ SECTION: FORM -->
+                <!-- █ SECCIÓN: FORMULARIO -->
                 <!-- ------------------------------------------------------------------- -->
                 <form class="grid grid-cols-1 gap-4 mb-5">
                     <input type="hidden" v-model="rating" />

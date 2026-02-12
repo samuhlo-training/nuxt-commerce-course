@@ -2,16 +2,16 @@
 /**
  * █ [PRODUCT] :: SUGGESTIONS
  * =====================================================================
- * DESC:   Related products suggestions.
- *         Fetches and displays suggested products grid.
- * STATUS: STABLE
+ * DESC:   Sugerencias de productos relacionados.
+ *         Obtiene y muestra una cuadrícula de productos sugeridos.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 import { ProductSuggestions, USkeleton, ProductsGrid, ClientOnly } from '../../../.nuxt/components';
 
 // =============================================================================
-// █ CORE: PROPS
+// █ NÚCLEO: PROPS
 // =============================================================================
 const props = defineProps<{
     slug: string;
@@ -20,7 +20,7 @@ const props = defineProps<{
 const slug = props.slug;
 
 // =============================================================================
-// █ CORE: DATA FETCHING
+// █ NÚCLEO: OBTENCIÓN DE DATOS
 // =============================================================================
 const { data: productSuggestions, status } = useLazyFetch<Product[]>(`/api/product/${slug}/suggestions`, {
     server: false,
@@ -30,7 +30,7 @@ const { data: productSuggestions, status } = useLazyFetch<Product[]>(`/api/produ
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: SUGGESTIONS -->
+    <!-- █ COMPONENTE: SUGERENCIAS -->
     <!-- ======================================================================= -->
     <ClientOnly>
         <div v-if="status === 'pending'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

@@ -1,20 +1,20 @@
 /**
  * █ [COMPOSABLE] :: AUTHENTICATION
  * =====================================================================
- * DESC:   Manages user authentication session.
- * META:   - Wrapping h3/auth session management
- *         - Provides login, register, logout actions
- * STATUS: STABLE
+ * DESC:   Gestiona la sesión de autenticación del usuario.
+ * META:   - Envuelve la gestión de sesiones de h3/auth
+ *         - Proporciona acciones de iniciar sesión, registrarse y cerrar sesión
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export const useAuthentication = () => {
   // ===========================================================================
-  // █ STATE & DEPENDENCIES
+  // █ ESTADO Y DEPENDENCIAS
   // ===========================================================================
   const { user, session, loggedIn, clear, fetch } = useUserSession();
 
   // ===========================================================================
-  // █ ACTIONS
+  // █ ACCIONES
   // ===========================================================================
   const login = async (email: string, password: string) => {
     try {
@@ -48,7 +48,7 @@ export const useAuthentication = () => {
   };
 
   // ===========================================================================
-  // █ EXPOSE
+  // █ EXPONER
   // ===========================================================================
   return {
     user,

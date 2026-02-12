@@ -1,20 +1,20 @@
 /**
  * █ [COMPOSABLE] :: PAGINATED_PRODUCTS
  * =====================================================================
- * DESC:   Fetches products with pagination support.
- * META:   - Syncs with URL query params (page, limit)
- *         - Computed offsets
- * STATUS: STABLE
+ * DESC:   Obtiene productos con soporte de paginación.
+ * META:   - Sincroniza con parámetros de consulta URL (página, límite)
+ *         - Desplazamientos computados
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export const usePaginatedProducts = async () => {
   // ===========================================================================
-  // █ DEPENDENCIES
+  // █ DEPENDENCIAS
   // ===========================================================================
   const route = useRoute();
 
   // ===========================================================================
-  // █ COMPUTED STATE
+  // █ ESTADO COMPUTADO
   // ===========================================================================
   const page = computed(() => {
     const pageParam = route.query.page as string;
@@ -31,7 +31,7 @@ export const usePaginatedProducts = async () => {
   });
 
   // ===========================================================================
-  // █ DATA FETCHING
+  // █ OBTENCIÓN DE DATOS
   // ===========================================================================
   const { data, error, status, execute, pending } = await useFetch(
     "/api/products",
@@ -46,7 +46,7 @@ export const usePaginatedProducts = async () => {
   );
 
   // ===========================================================================
-  // █ EXPOSE
+  // █ EXPONER
   // ===========================================================================
   return {
     data, // Reactiva

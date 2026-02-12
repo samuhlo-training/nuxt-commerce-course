@@ -2,11 +2,11 @@
 /**
  * █ [PAGE] :: LOGIN
  * =====================================================================
- * DESC:   Login page with email/password and social providers.
+ * DESC:   Página de inicio de sesión con correo/contraseña y proveedores sociales.
  * PATH:   /login
- * META:   - Uses 'login-layout'
- *         - Redirects if already authenticated
- * STATUS: STABLE
+ * META:   - Usa 'login-layout'
+ *         - Redirige si ya está autenticado
+ * STATUS: ESTABLE
  * =====================================================================
  */
 import * as z from 'zod'
@@ -22,11 +22,11 @@ definePageMeta({
 })
 
 // =============================================================================
-// █ CORE / DEPENDENCIES
+// █ NÚCLEO / DEPENDENCIAS
 // =============================================================================
 const toast = useToast()
 // =============================================================================
-// █ STATE
+// █ ESTADO
 // =============================================================================
 const cookieLoginEmail = useCookie<string | null>('loginEmail', {
     sameSite: 'strict',
@@ -34,14 +34,14 @@ const cookieLoginEmail = useCookie<string | null>('loginEmail', {
 })
 
 // =============================================================================
-// █ AUTHENTICATION
+// █ AUTENTICACIÓN
 // =============================================================================
 const {login} = useAuthentication()
 const isPosting = ref(false)
 
 
 // =============================================================================
-// █ FORM CONFIGURATION
+// █ CONFIGURACIÓN DEL FORMULARIO
 // =============================================================================
 const fields: AuthFormField[] = [{
     name: 'email',
@@ -78,7 +78,7 @@ const providers = [{
 }]
 
 // =============================================================================
-// █ VALIDATION SCHEMA
+// █ ESQUEMA DE VALIDACIÓN
 // =============================================================================
 const schema = z.object({
     email: z.email('Correo electrónico inválido'),
@@ -89,7 +89,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 // =============================================================================
-// █ INTERACTION HANDLERS
+// █ MANEJADORES DE INTERACCIÓN
 // =============================================================================
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
     const {email, password, remember} = payload.data
@@ -112,7 +112,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: LOGIN -->
+    <!-- █ PÁGINA: INICIO DE SESIÓN -->
     <!-- ======================================================================= -->
     <div class="flex flex-col items-center justify-center gap-4 p-4">
         <UPageCard class="w-full max-w-md">

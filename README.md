@@ -25,12 +25,12 @@
 
 ![Hero Preview](public/preview_dashboard.webp)
 
-> **ABSTRACT:** A robust e-commerce platform built with Nuxt 3, featuring a custom admin dashboard, product management, and secure authentication. Engineered with a strict "Brutalist" coding style for maximum readability and maintainability.
+> **ABSTRACT:** Una plataforma de comercio electrónico robusta construida con Nuxt 3, que presenta un panel de administración personalizado, gestión de productos y autenticación segura. Diseñada con un estilo de código "Brutalista" estricto para máxima legibilidad y mantenibilidad.
 >
 > <br />
 >
-> **ORIGIN:** Based on [Nuxt 3 - The Complete Guide](https://cursos.devtalles.com/courses/nuxt-3-guia-completa) by **Fernando Herrera**.
-> *Adapted with strict architectural rules and "Brutalist" commenting standards.*
+> **ORIGIN:** Basado en [Nuxt 3 - The Complete Guide](https://cursos.devtalles.com/courses/nuxt-3-guia-completa) de **Fernando Herrera**.
+> *Adaptado con reglas arquitectónicas estrictas y estándares de comentarios propios.*
 >
 > <br />
 >
@@ -42,46 +42,46 @@
 
 | COMPONENT | TECH | NOTE |
 | :--- | :--- | :--- |
-| **Core** | `Nuxt 3` | Composition API / Script Setup |
-| **State** | `Composables` | Native `useState` / `h3` Session |
-| **Database** | `NeonDB` | Serverless PostgreSQL via Prisma |
-| **Storage** | `Cloudinary` | Image Optimization & Uploads |
-| **Styles** | `Tailwind CSS` | Utility-first / Nuxt UI |
+| **Núcleo** | `Nuxt 3` | Composition API / Script Setup |
+| **Estado** | `Composables` | Nativo `useState` / Sesión `h3` |
+| **Base de datos** | `NeonDB` | PostgreSQL Serverless vía Prisma |
+| **Almacenamiento** | `Cloudinary` | Optimización de Imágenes y Subidas |
+| **Estilos** | `Tailwind CSS` | Utility-first / Nuxt UI |
 
 <br>
 
 ### 02 __ INSTALLATION
 
-*Run local environment:*
+*Ejecutar entorno local:*
 
 ```bash
-# 1. Clone
+# 1. Clonar
 git clone <repository-url>
 
-# 2. Install dependencies
+# 2. Instalar dependencias
 bun install
 
-# 3. Setup Environment
+# 3. Configurar Entorno
 cp .env.template .env
-# (Fill in DATABASE_URL, NUXT_OAUTH_*, CLOUDINARY_*)
+# (Rellenar DATABASE_URL, NUXT_OAUTH_*, CLOUDINARY_*)
 
-# 4. Database Setup
+# 4. Configurar Base de Datos
 bunx prisma migrate dev
 bun seed
 
-# 5. Ignite
+# 5. Iniciar
 bun dev
 ```
 
 ### 03 __ KEY FEATURES
 
--   **Admin Dashboard:** Full CRUD for products with image upload support.
--   **Authentication:** Multi-provider support (GitHub) via H3 and server-side sessions.
--   **Cloud Native:** Powered by **NeonDB** (Database) and **Cloudinary** (Media Assets).
--   **Brutalist Codebase:** Every component and API handler features standardized "Dog Tag" headers for instant context.
+-   **Panel de Administración:** CRUD completo para productos con soporte de subida de imágenes.
+-   **Autenticación:** Soporte multi-proveedor (GitHub) vía H3 y sesiones del lado del servidor.
+-   **Nativo en la Nube:** Impulsado por **NeonDB** (Base de Datos) y **Cloudinary** (Activos Multimedia).
+-   **Código Brutalista:** Cada componente y manejador API presenta cabeceras estandarizadas "Dog Tag" para contexto instantáneo.
 
-A. THE HOOK (API Handler Pattern)
-Using `defineEventHandler` with strict commentary:
+A. EL GANCHO (Patrón de Manejador API)
+Usando `defineEventHandler` con comentarios estrictos:
 
 ```typescript
 /**
@@ -100,7 +100,7 @@ export default defineEventHandler(async (event) => {
 <div align="center">
 <br />
 
-<code>DESIGNED & CODED BY <a href='https://github.com/samuhlo'>samuhlo</a></code>
+<code>DISEÑADO Y CODIFICADO POR <a href='https://github.com/samuhlo'>samuhlo</a></code>
 
 <small>Lugo, Galicia</small>
 

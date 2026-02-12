@@ -2,9 +2,9 @@
 /**
  * █ [HOME] :: CTA
  * =====================================================================
- * DESC:   Call to action section for the home page.
- *         Fetches content from API.
- * STATUS: STABLE
+ * DESC:   Sección de llamada a la acción para la página de inicio.
+ *         Obtiene contenido de la API.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 

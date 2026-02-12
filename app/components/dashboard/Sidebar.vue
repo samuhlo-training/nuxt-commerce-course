@@ -2,9 +2,9 @@
 /**
  * █ [DASHBOARD] :: SIDEBAR
  * =====================================================================
- * DESC:   Sidebar navigation for the dashboard.
- *         Supports collapsible state and search functionality.
- * STATUS: STABLE
+ * DESC:   Navegación lateral para el panel de control.
+ *         Soporta estado colapsable y funcionalidad de búsqueda.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
@@ -15,12 +15,12 @@ import {
 } from '@nuxt/ui';
 
 // =============================================================================
-// █ CORE: STATE
+// █ NÚCLEO: ESTADO
 // =============================================================================
 const { user } = useAuthentication();
 
 // =============================================================================
-// █ CONFIG: NAVIGATION ITEMS
+// █ CONFIG: ELEMENTOS DE NAVEGACIÓN
 // =============================================================================
 const items: NavigationMenuItem[][] = [
     [
@@ -38,11 +38,11 @@ const items: NavigationMenuItem[][] = [
             exact: false,
         },
         {
-            label: 'Contacts',
+            label: 'Contactos',
             icon: 'i-lucide-users',
         },
         {
-            label: 'Settings',
+            label: 'Ajustes',
             icon: 'i-lucide-settings',
             defaultOpen: true,
             children: [
@@ -50,10 +50,10 @@ const items: NavigationMenuItem[][] = [
                     label: 'General',
                 },
                 {
-                    label: 'Members',
+                    label: 'Miembros',
                 },
                 {
-                    label: 'Notifications',
+                    label: 'Notificaciones',
                 },
             ],
         },
@@ -66,7 +66,7 @@ const items: NavigationMenuItem[][] = [
             target: '_blank',
         },
         {
-            label: 'Help & Support',
+            label: 'Ayuda y Soporte',
             icon: 'i-lucide-info',
             to: 'https://github.com/nuxt/ui',
             target: '_blank',
@@ -75,7 +75,7 @@ const items: NavigationMenuItem[][] = [
 ];
 
 // =============================================================================
-// █ CONFIG: SEARCH
+// █ CONFIG: BÚSQUEDA
 // =============================================================================
 const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
     {
@@ -101,7 +101,7 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
     <UDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-default' }">
         
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ SLOT: HEADER -->
+        <!-- █ SLOT: CABECERA -->
         <!-- ------------------------------------------------------------------- -->
         <template #header="{ collapsed }" class="flex items-center gap-2">
             <NuxtLink to="/" class="flex flex-row items-center justify-center">
@@ -111,7 +111,7 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
         </template>
 
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ SLOT: DEFAULT (CONTENT) -->
+        <!-- █ SLOT: POR DEFECTO (CONTENIDO) -->
         <!-- ------------------------------------------------------------------- -->
         <template #default="{ collapsed }">
             <UDashboardSearchButton />
@@ -127,7 +127,7 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
         </template>
 
         <!-- ------------------------------------------------------------------- -->
-        <!-- █ SLOT: FOOTER -->
+        <!-- █ SLOT: PIE -->
         <!-- ------------------------------------------------------------------- -->
         <template #footer="{ collapsed }">
             <UButton :avatar="{

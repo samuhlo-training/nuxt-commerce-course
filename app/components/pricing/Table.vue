@@ -2,14 +2,14 @@
 /**
  * █ [PRICING] :: TABLE
  * =====================================================================
- * DESC:   Pricing table component.
- *         Displays plans, features and comparisons.
- * STATUS: STABLE
+ * DESC:   Componente de tabla de precios.
+ *         Muestra planes, características y comparaciones.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ CONFIG: TIERS
+// █ CONFIG: NIVELES
 // =============================================================================
 const tiers = [
     {
@@ -39,7 +39,7 @@ const tiers = [
 ];
 
 // =============================================================================
-// █ CONFIG: SECTIONS & FEATURES
+// █ CONFIG: SECCIONES Y CARACTERÍSTICAS
 // =============================================================================
 const sections = [
     {
@@ -71,7 +71,7 @@ const sections = [
 ];
 
 // =============================================================================
-// █ CONFIG: PLANS
+// █ CONFIG: PLANES
 // =============================================================================
 const plans = ref([
     {
@@ -106,7 +106,7 @@ const plans = ref([
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: PRICING TABLE -->
+    <!-- █ COMPONENTE: TABLA DE PRECIOS -->
     <!-- ======================================================================= -->
     <UPricingTable :tiers="tiers" :sections="sections">
         <!-- Personalizar el título de un nivel específico -->

@@ -3,10 +3,10 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: PRODUCT_LIST
  * =====================================================================
- * DESC:   Fetch products with pagination.
- * META:   - Query params: limit, offset
- *         - Returns products + pagination metadata
- * STATUS: STABLE
+ * DESC:   Obtiene productos con paginación.
+ * META:   - Parámetros de consulta: limit, offset
+ *         - Devuelve productos + metadatos de paginación
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

@@ -3,9 +3,9 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: ADMIN_PRODUCT_DETAIL
  * =====================================================================
- * DESC:   Get product for admin editing.
- * META:   - Special handling for id="new" (returns empty template)
- * STATUS: STABLE
+ * DESC:   Obtiene producto para edición de administrador.
+ * META:   - Manejo especial para id="new" (devuelve plantilla vacía)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

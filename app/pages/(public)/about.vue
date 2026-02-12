@@ -2,15 +2,15 @@
 /**
  * █ [PAGE] :: ABOUT
  * =====================================================================
- * DESC:   Static about page with SEO metadata.
+ * DESC:   Página estática "acerca de" con metadatos SEO.
  * PATH:   /about
- * META:   - Sets detailed SEO tags (OG, Twitter)
- * STATUS: STABLE
+ * META:   - Establece etiquetas SEO detalladas (OG, Twitter)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ SEO META
+// █ META SEO
 // =============================================================================
 useSeoMeta({
     title: 'About - Mi Sitio Nuxt',
@@ -28,7 +28,7 @@ useSeoMeta({
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: ABOUT -->
+    <!-- █ PÁGINA: ACERCA DE -->
     <!-- ======================================================================= -->
     <div>
         <h1>About Page</h1>

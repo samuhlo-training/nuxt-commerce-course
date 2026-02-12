@@ -2,39 +2,39 @@
 /**
  * █ [DASHBOARD] :: NAVBAR
  * =====================================================================
- * DESC:   Top navigation bar for the dashboard layout.
- *         Handles breadcrumbs, user menu, and notifications.
- * STATUS: STABLE
+ * DESC:   Barra de navegación superior para el diseño del panel de control.
+ *         Maneja migas de pan, menú de usuario y notificaciones.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ CORE: DEPENDENCIES & STATE
+// █ NÚCLEO: DEPENDENCIAS Y ESTADO
 // =============================================================================
 const { logout } = useAuthentication();
 const route = useRoute();
 
 // =============================================================================
-// █ LOGIC: BREADCRUMBS
+// █ LÓGICA: MIGAS DE PAN
 // =============================================================================
-// [TODO]: Refactor to a composable for cleaner logic
+// [TODO]: Refactorizar a un composable para una lógica más limpia
 const breadcrumbItems = computed(() => {
-    // 1. 'route.matched' gives an array with the entire hierarchy of current routes.
-    // IT IS LIKE ASKING: "What doors did I pass through to get here?"
+    // 1. 'route.matched' devuelve un array con toda la jerarquía de rutas actuales.
+    // ES COMO PREGUNTAR: "¿Por qué puertas pasé para llegar aquí?"
     return route.matched.map((record) => {
         return {
-            // Use the title saved in 'meta', and if not, the route name.
+            // Usa el título guardado en 'meta', y si no, el nombre de la ruta.
             label: (record.meta.breadcrumbName || record.name || 'Inicio') as string,
-            // 'path' is the real and complete route, so the link will never fail!
+            // 'path' es la ruta real y completa, ¡así que el enlace nunca fallará!
             to: record.path,
-            // You can also save icons in meta.
+            // También puedes guardar iconos en meta.
             icon: (record.meta.icon || 'i-lucide-chevron-right') as string
         };
     });
 });
 
 // =============================================================================
-// █ CONFIG: MENU ITEMS
+// █ CONFIG: ELEMENTOS DEL MENÚ
 // =============================================================================
 const userMenuItems = [
     [
@@ -70,14 +70,14 @@ const userMenuItems = [
         <div class="flex items-center justify-between px-6 py-4">
             
             <!-- ------------------------------------------------------------------- -->
-            <!-- █ SECTION: LEFT (BREADCRUMB) -->
+            <!-- █ SECCIÓN: IZQUIERDA (MIGAS DE PAN) -->
             <!-- ------------------------------------------------------------------- -->
             <div class="flex-1">
                 <UBreadcrumb :items="breadcrumbItems" :ui="{ list: 'text-sm font-medium' }" />
             </div>
 
             <!-- ------------------------------------------------------------------- -->
-            <!-- █ SECTION: RIGHT (ACTIONS & MENU) -->
+            <!-- █ SECCIÓN: DERECHA (ACCIONES Y MENÚ) -->
             <!-- ------------------------------------------------------------------- -->
             <div class="flex items-center gap-4 ms-auto">
                 <!-- Notification Bell -->

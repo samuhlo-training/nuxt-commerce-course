@@ -4,16 +4,16 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: PRODUCT_REVIEW_POST
  * =====================================================================
- * DESC:   Submit a new product review.
- * META:   - Validates input
- *         - Checks if user is logged in
- *         - Checks for existing review (one per user per product)
- * STATUS: STABLE
+ * DESC:   Envía una nueva reseña de producto.
+ * META:   - Valida la entrada
+ *         - Comprueba si el usuario ha iniciado sesión
+ *         - Comprueba si existe una reseña (una por usuario por producto)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ VALIDATION SCHEMA
+// █ ESQUEMA DE VALIDACIÓN
 // =============================================================================
 const bodySchema = z.object({
   rating: z.number().min(1).max(5),
@@ -23,13 +23,13 @@ const bodySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   // ===========================================================================
-  // █ BODY & PARAMS
+  // █ CUERPO Y PARÁMETROS
   // ===========================================================================
   const body = await readValidatedBody(event, bodySchema.parse);
   const slug = getRouterParam(event, "slug");
 
   // ===========================================================================
-  // █ AUTHENTICATION
+  // █ AUTENTICACIÓN
   // ===========================================================================
   const session = await requireUserSession(event);
   const userId = session.user.id;
@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ PRODUCT CHECK
+  // █ VERIFICACIÓN DE PRODUCTO
   // ===========================================================================
   const product = await prisma.product.findUnique({
     where: {
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ DUPLICATE CHECK
+  // █ VERIFICACIÓN DE DUPLICADOS
   // ===========================================================================
   // Usuario no tiene reseñas sobre este producto
   const existingReview = await prisma.productReview.findFirst({
@@ -80,7 +80,7 @@ export default defineEventHandler(async (event) => {
   console.log({ userId });
 
   // ===========================================================================
-  // █ CREATE REVIEW
+  // █ CREAR RESEÑA
   // ===========================================================================
   const review = await prisma.productReview.create({
     data: {

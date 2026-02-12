@@ -3,9 +3,9 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: PRODUCT_DETAIL
  * =====================================================================
- * DESC:   Get product details by slug.
- * META:   - Handles 404
- * STATUS: STABLE
+ * DESC:   Obtiene detalles del producto por slug.
+ * META:   - Maneja 404
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

@@ -2,11 +2,11 @@
 /**
  * █ [PAGE] :: REGISTER
  * =====================================================================
- * DESC:   User registration page.
+ * DESC:   Página de registro de usuario.
  * PATH:   /register
- * META:   - Uses 'login-layout'
- *         - Redirects if already authenticated
- * STATUS: STABLE
+ * META:   - Usa 'login-layout'
+ *         - Redirige si ya está autenticado
+ * STATUS: ESTABLE
  * =====================================================================
  */
 import * as z from 'zod'
@@ -22,12 +22,12 @@ definePageMeta({
 })
 
 // =============================================================================
-// █ CORE / DEPENDENCIES
+// █ NÚCLEO / DEPENDENCIAS
 // =============================================================================
 const toast = useToast()
 
 // =============================================================================
-// █ FORM CONFIGURATION
+// █ CONFIGURACIÓN DEL FORMULARIO
 // =============================================================================
 const fields: AuthFormField[] = [
     {
@@ -59,7 +59,7 @@ const fields: AuthFormField[] = [
 
 
 // =============================================================================
-// █ VALIDATION SCHEMA
+// █ ESQUEMA DE VALIDACIÓN
 // =============================================================================
 const schema = z.object({
     name: z.string('El nombre es requerido').min(2, 'Debe tener al menos 2 caracteres'),
@@ -74,7 +74,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 // =============================================================================
-// █ INTERACTION HANDLERS
+// █ MANEJADORES DE INTERACCIÓN
 // =============================================================================
 function onSubmit(payload: FormSubmitEvent<Schema>) {
     console.log('Registro submitted', payload)
@@ -83,7 +83,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: REGISTER -->
+    <!-- █ PÁGINA: REGISTRO -->
     <!-- ======================================================================= -->
     <div class="flex flex-col items-center justify-center gap-4 p-4">
         <UPageCard class="w-full max-w-md">

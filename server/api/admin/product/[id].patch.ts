@@ -4,11 +4,11 @@ import { z } from "zod";
 /**
  * █ [API] :: ADMIN_PRODUCT_UPDATE
  * =====================================================================
- * DESC:   Update existing product (with file upload).
- * META:   - Handles multipart/form-data
- *         - Parses JSON data field manually
- *         - Uploads files to cloud
- * STATUS: STABLE
+ * DESC:   Actualiza un producto existente (con subida de archivos).
+ * META:   - Maneja multipart/form-data
+ *         - Analiza el campo de datos JSON manualmente
+ *         - Sube archivos a la nube
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
@@ -29,7 +29,7 @@ const bodySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   // ===========================================================================
-  // █ PARAMS & MULTIPART
+  // █ PARÁMETROS Y MULTIPART
   // ===========================================================================
   const id = getRouterParam(event, "id") as string;
   const formData = await readMultipartFormData(event);
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ FILE PROCESSING
+  // █ PROCESAMIENTO DE ARCHIVOS
   // ===========================================================================
   //Procesar los archivos
   console.log({ formData });
@@ -67,7 +67,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ JSON PARSING
+  // █ ANÁLISIS JSON
   // ===========================================================================
   const body = bodySchema.safeParse(JSON.parse(dataString));
 
@@ -81,7 +81,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ PRODUCT CHECK
+  // █ VERIFICACIÓN DE PRODUCTO
   // ===========================================================================
   //Confirmar que el producto exista
   const product = await prisma.product.findUnique({
@@ -98,7 +98,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ CLOUD UPLOAD
+  // █ SUBIDA A LA NUBE
   // ===========================================================================
   // Enviar los archivos al Cloud
   if (files.length > 0) {
@@ -113,7 +113,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // ===========================================================================
-  // █ DB UPDATE
+  // █ ACTUALIZACIÓN DE BD
   // ===========================================================================
   const updateProduct = await prisma.product.update({
     where: {
@@ -123,7 +123,7 @@ export default defineEventHandler(async (event) => {
   });
 
   // ===========================================================================
-  // █ RESPONSE
+  // █ RESPUESTA
   // ===========================================================================
   return {
     message: "Producto actualizado correctamente",

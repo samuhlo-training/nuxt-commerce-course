@@ -3,10 +3,10 @@ import prisma from "~~/lib/prisma";
 /**
  * █ [API] :: PRODUCT_SUGGESTIONS
  * =====================================================================
- * DESC:   Get related products based on tags.
- * META:   - Excludes current product
- *         - DEMO DELAY included for skeleton visualization
- * STATUS: STABLE
+ * DESC:   Obtiene productos relacionados basados en etiquetas.
+ * META:   - Excluye el producto actual
+ *         - RETRASO DE DEMO incluido para visualización de esqueleto
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

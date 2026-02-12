@@ -2,22 +2,22 @@
 /**
  * █ [SHARED] :: HEADER
  * =====================================================================
- * DESC:   Main application header.
- *         Handles responsive navigation and user authentication state.
- * STATUS: STABLE
+ * DESC:   Encabezado principal de la aplicación.
+ *         Maneja la navegación adaptable y el estado de autenticación del usuario.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 // =============================================================================
-// █ CORE: DEPENDENCIES & STATE
+// █ NÚCLEO: DEPENDENCIAS Y ESTADO
 // =============================================================================
 const route = useRoute();
 const { isLoggedIn, logout, isAdmin } = useAuthentication();
 
 // =============================================================================
-// █ CONFIG: NAVIGATION
+// █ CONFIG: NAVEGACIÓN
 // =============================================================================
 const items = computed<NavigationMenuItem[]>(() => [{
     label: 'Productos',
@@ -54,7 +54,7 @@ const responsiveMenu = ref([
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: HEADER -->
+    <!-- █ COMPONENTE: ENCABEZADO -->
     <!-- ======================================================================= -->
     <UHeader>
         <template #title>

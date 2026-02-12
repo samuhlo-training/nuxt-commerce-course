@@ -13,10 +13,10 @@ const bodySchema = z.object({
 /**
  * █ [API] :: ADMIN_PRODUCT_CREATE
  * =====================================================================
- * DESC:   Create new product.
- * META:   - Basic creation logic
- *         - Use PATCH endpoint for file uploads
- * STATUS: STABLE
+ * DESC:   Crear nuevo producto.
+ * META:   - Lógica de creación básica
+ *         - Usa el endpoint PATCH para la subida de archivos
+ * STATUS: ESTABLE
  * =====================================================================
  */
 export default defineEventHandler(async (event) => {

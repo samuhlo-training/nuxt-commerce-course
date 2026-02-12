@@ -2,15 +2,15 @@
 /**
  * █ [PAGE] :: DASHBOARD_INDEX
  * =====================================================================
- * DESC:   Main dashboard overview page.
+ * DESC:   Página principal de resumen del panel de control.
  * PATH:   /dashboard
- * META:   - Breadcrumb: Dashboard
- * STATUS: STABLE
+ * META:   - Migas de pan: Dashboard
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ PAGE META
+// █ META DE PÁGINA
 // =============================================================================
 definePageMeta({
     breadcrumbName: 'Dashboard',
@@ -19,11 +19,11 @@ definePageMeta({
 </script>
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: DASHBOARD_INDEX -->
+    <!-- █ PÁGINA: ÍNDICE_DASHBOARD -->
     <!-- ======================================================================= -->
     <div class="space-y-6">
         <!-- =================================================================== -->
-        <!-- █ HEADER -->
+        <!-- █ ENCABEZADO -->
         <!-- =================================================================== -->
         <div>
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
@@ -35,7 +35,7 @@ definePageMeta({
         </div>
 
         <!-- =================================================================== -->
-        <!-- █ STATISTICS CARDS -->
+        <!-- █ TARJETAS DE ESTADÍSTICAS -->
         <!-- =================================================================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <UCard>
@@ -120,7 +120,7 @@ definePageMeta({
         </div>
 
         <!-- =================================================================== -->
-        <!-- █ RECENT ACTIVITIES -->
+        <!-- █ ACTIVIDADES RECIENTES -->
         <!-- =================================================================== -->
         <UCard>
             <template #header>

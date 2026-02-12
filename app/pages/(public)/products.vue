@@ -2,22 +2,22 @@
 /**
  * █ [PAGE] :: PRODUCTS_LIST_PUBLIC
  * =====================================================================
- * DESC:   Public specific products catalog.
+ * DESC:   Catálogo de productos específico público.
  * PATH:   /products
- * META:   - Fetches paginated products (public view)
- * STATUS: STABLE
+ * META:   - Obtiene productos paginados (vista pública)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ DATA FETCHING
+// █ OBTENCIÓN DE DATOS
 // =============================================================================
 const { products, total, currentPage, perPage } = await usePaginatedProducts();
 </script>
 
 <template>
   <!-- ======================================================================= -->
-  <!-- █ PAGE: PRODUCTS_LIST_PUBLIC -->
+  <!-- █ PÁGINA: LISTA_DE_PRODUCTOS_PÚBLICA -->
   <!-- ======================================================================= -->
   <UPageCTA orientation="horizontal" title="Productos" description="Descubre nuestros productos y servicios.">
     <template #default>
@@ -30,12 +30,12 @@ const { products, total, currentPage, perPage } = await usePaginatedProducts();
   <div class="mt-10" />
 
   <!-- ======================================================================= -->
-  <!-- █ PRODUCTS GRID -->
+  <!-- █ CUADRÍCULA DE PRODUCTOS -->
   <!-- ======================================================================= -->
   <ProductsGrid :products="products || []" />
 
   <!-- ======================================================================= -->
-  <!-- █ PAGINATION -->
+  <!-- █ PAGINACIÓN -->
   <!-- ======================================================================= -->
   <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
 </template>

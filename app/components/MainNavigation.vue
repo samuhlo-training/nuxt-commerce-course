@@ -2,8 +2,8 @@
 /**
  * █ [SHARED] :: MAIN_NAVIGATION
  * =====================================================================
- * DESC:   Main navigation bar for the application.
- * STATUS: STABLE
+ * DESC:   Barra de navegación principal para la aplicación.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 </script>

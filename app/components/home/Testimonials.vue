@@ -2,14 +2,14 @@
 /**
  * █ [HOME] :: TESTIMONIALS
  * =====================================================================
- * DESC:   Testimonials section using masonry layout.
- *         Fetches reviews from API.
- * STATUS: STABLE
+ * DESC:   Sección de testimonios usando diseño masonry.
+ *         Obtiene reseñas de la API.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 // =============================================================================
-// █ CORE: DATA FETCHING & TRANSFORMATION
+// █ NÚCLEO: OBTENCIÓN Y TRANSFORMACIÓN DE DATOS
 // =============================================================================
 const { data } = await useFetch('/api/home/reviews')
 const testimonials = computed(() => {
@@ -31,7 +31,7 @@ const testimonials = computed(() => {
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: TESTIMONIALS -->
+    <!-- █ COMPONENTE: TESTIMONIOS -->
     <!-- ======================================================================= -->
     <UPageSection title="Testimonios" description="Nuestros testimonios de clientes satisfechos"
         headline="Testimonios" />

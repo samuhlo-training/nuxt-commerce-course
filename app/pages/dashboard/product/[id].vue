@@ -2,18 +2,18 @@
 /**
  * █ [PAGE] :: DASHBOARD_PRODUCT_DETAIL
  * =====================================================================
- * DESC:   Create or Edit a product.
+ * DESC:   Crear o editar un producto.
  * PATH:   /dashboard/product/:id
- * META:   - Validates form data (slug, name, description, price)
- *         - Handle image uploads
- *         - Create/Update logic via useAdminProduct
- * STATUS: STABLE
+ * META:   - Valida datos del formulario (slug, nombre, descripción, precio)
+ *         - Maneja subida de imágenes
+ *         - Lógica de Crear/Actualizar vía useAdminProduct
+ * STATUS: ESTABLE
  * =====================================================================
  */
 import { z } from 'zod';
 
 // =============================================================================
-// █ CORE / DEPENDENCIES
+// █ NÚCLEO / DEPENDENCIAS
 // =============================================================================
 
 const router = useRouter();
@@ -33,7 +33,7 @@ if (messageQuery) {
 }
 
 // =============================================================================
-// █ DATA FETCHING
+// █ OBTENCIÓN DE DATOS
 // =============================================================================
 const rawId = route.params.id as string;
 
@@ -49,7 +49,7 @@ if (error.value) {
 }
 
 // =============================================================================
-// █ STATE & COMPUTED
+// █ ESTADO Y COMPUTADOS
 // =============================================================================
 const isCreating = computed(() => rawId === 'new');
 
@@ -68,7 +68,7 @@ const subtitle = computed(() =>
 );
 
 // =============================================================================
-// █ VALIDATION CONFIG
+// █ CONFIGURACIÓN DE VALIDACIÓN
 // =============================================================================
 const productSchema = z.object({
   slug: z.string().nonempty('El Slug es requerido'),
@@ -78,7 +78,7 @@ const productSchema = z.object({
 });
 
 // =============================================================================
-// █ INTERACTION HANDLERS
+// █ MANEJADORES DE INTERACCIÓN
 // =============================================================================
 const checkValidations = () => {
   fieldErrors.value = {};
@@ -164,7 +164,7 @@ const removeFilePreview = (index: number) => {
 };
 
 // =============================================================================
-// █ WATCHERS
+// █ OBSERVADORES
 // =============================================================================
 watch(
   newProduct,
@@ -179,7 +179,7 @@ watch(
 
 <template>
   <!-- ======================================================================= -->
-  <!-- █ PAGE: DASHBOARD_PRODUCT_DETAIL -->
+  <!-- █ PÁGINA: DETALLE_PRODUCTO_DASHBOARD -->
   <!-- ======================================================================= -->
   <div class="mx-auto max-w-4xl space-y-8">
     <section class="space-y-1">

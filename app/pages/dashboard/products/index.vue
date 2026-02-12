@@ -2,29 +2,29 @@
 /**
  * █ [PAGE] :: DASHBOARD_PRODUCTS_LIST
  * =====================================================================
- * DESC:   List all products with pagination and actions.
+ * DESC:   Lista todos los productos con paginación y acciones.
  * PATH:   /dashboard/products
- * META:   - Fetches paginated products
- *         - Displays table with custom cells (Image, Name, Price, Tags)
- * STATUS: STABLE
+ * META:   - Obtiene productos paginados
+ *         - Muestra tabla con celdas personalizadas (Imagen, Nombre, Precio, Etiquetas)
+ * STATUS: ESTABLE
  * =====================================================================
  */
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
 
 // =============================================================================
-// █ CORE / DEPENDENCIES
+// █ NÚCLEO / DEPENDENCIAS
 // =============================================================================
 const UBadge = resolveComponent('UBadge');
 const NuxtLink = resolveComponent('NuxtLink');
 
 // =============================================================================
-// █ DATA FETCHING
+// █ OBTENCIÓN DE DATOS
 // =============================================================================
 const { products, total, currentPage, perPage, status } = await usePaginatedProducts();
 
 // =============================================================================
-// █ PAGE META
+// █ META DE PÁGINA
 // =============================================================================
 definePageMeta({
     breadcrumbName: 'Productos',
@@ -32,7 +32,7 @@ definePageMeta({
 })
 
 // =============================================================================
-// █ TABLE CONFIGURATION
+// █ CONFIGURACIÓN DE TABLA
 // =============================================================================
 const columns: TableColumn<Product>[] = [
     {
@@ -120,11 +120,11 @@ const columns: TableColumn<Product>[] = [
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: DASHBOARD_PRODUCTS_LIST -->
+    <!-- █ PÁGINA: LISTA_PRODUCTOS_DASHBOARD -->
     <!-- ======================================================================= -->
     <div class="space-y-6">
         <!-- =================================================================== -->
-        <!-- █ HEADER -->
+        <!-- █ ENCABEZADO -->
         <!-- =================================================================== -->
         <div class="flex items-center justify-between">
             <div>
@@ -139,12 +139,12 @@ const columns: TableColumn<Product>[] = [
         </div>
 
         <!-- =================================================================== -->
-        <!-- █ TABLE -->
+        <!-- █ TABLA -->
         <!-- =================================================================== -->
         <UTable :loading="status !== 'success'" :data="products" :columns="columns" class="flex-1" />
 
         <!-- =================================================================== -->
-        <!-- █ PAGINATION -->
+        <!-- █ PAGINACIÓN -->
         <!-- =================================================================== -->
         <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
     </div>

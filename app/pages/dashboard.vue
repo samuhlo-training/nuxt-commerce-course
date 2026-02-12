@@ -2,10 +2,10 @@
 /**
  * █ [PAGE] :: DASHBOARD
  * =====================================================================
- * DESC:   Main dashboard layout wrapper.
+ * DESC:   Envoltura principal del diseño del panel de control.
  * PATH:   /dashboard
- * META:   Requires 'auth' middleware.
- * STATUS: STABLE
+ * META:   Requiere middleware 'auth'.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
@@ -22,7 +22,7 @@ definePageMeta({
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ PAGE: DASHBOARD -->
+    <!-- █ PÁGINA: PANEL DE CONTROL -->
     <!-- ======================================================================= -->
     <div>
         <NuxtPage />

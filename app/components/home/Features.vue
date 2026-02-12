@@ -2,16 +2,16 @@
 /**
  * █ [HOME] :: FEATURES
  * =====================================================================
- * DESC:   Features grid section for the home page.
- *         Displays cards with icon, title, description and optional image.
- * STATUS: STABLE
+ * DESC:   Sección de cuadrícula de características para la página de inicio.
+ *         Muestra tarjetas con icono, título, descripción e imagen opcional.
+ * STATUS: ESTABLE
  * =====================================================================
  */
 
 
 
 // =============================================================================
-// █ CONFIG: CARDS DATA
+// █ CONFIG: DATOS DE TARJETAS
 // =============================================================================
 const cards = ref([
     {
@@ -56,7 +56,7 @@ const cards = ref([
 
 <template>
     <!-- ======================================================================= -->
-    <!-- █ COMPONENT: FEATURES -->
+    <!-- █ COMPONENTE: CARACTERÍSTICAS -->
     <!-- ======================================================================= -->
     <UPageSection title="Características" description="Explora las características principales de Nuxt UI"
         headline="Características" />
