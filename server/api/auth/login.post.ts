@@ -2,6 +2,20 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: AUTH_LOGIN
+ * =====================================================================
+ * DESC:   Handle user login.
+ * META:   - Validates email/password with Zod
+ *         - Verifies credentials with bcrypt
+ *         - Sets user session
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
+// =============================================================================
+// █ VALIDATION SCHEMA
+// =============================================================================
 const bodySchema = z.object({
   email: z
     .string()
@@ -14,7 +28,15 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
+  // ===========================================================================
+  // █ BODY PARSING
+  // ===========================================================================
+
   const { email, password } = await readValidatedBody(event, bodySchema.parse);
+
+  // ===========================================================================
+  // █ LOGIC
+  // ===========================================================================
   const user = await prisma.user.findUnique({
     where: {
       email,
@@ -30,6 +52,16 @@ export default defineEventHandler(async (event) => {
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
+  if (!isPasswordValid) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Invalid password",
+    });
+  }
+
+  // ===========================================================================
+  // █ SESSION
+  // ===========================================================================
   await setUserSession(event, {
     user: {
       id: String(user.id),
@@ -40,13 +72,9 @@ export default defineEventHandler(async (event) => {
     loggedInAt: new Date(),
   });
 
-  if (!isPasswordValid) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: "Invalid password",
-    });
-  }
-
+  // ===========================================================================
+  // █ RESPONSE
+  // ===========================================================================
   return {
     message: "User logged in successfully",
     user: {

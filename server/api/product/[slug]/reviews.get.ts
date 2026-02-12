@@ -1,5 +1,13 @@
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: PRODUCT_REVIEWS_LIST
+ * =====================================================================
+ * DESC:   Get reviews for a product.
+ * META:   - Checks if current user has already reviewed
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
   // Idea: paginación
   const session = await getUserSession(event);

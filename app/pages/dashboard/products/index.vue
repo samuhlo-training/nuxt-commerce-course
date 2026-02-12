@@ -1,46 +1,45 @@
-<template>
-    <div class="space-y-6">
-        <!-- Header with Action Button -->
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-                    Productos
-                </h1>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">
-                    Gestiona y organiza tu catálogo de productos
-                </p>
-            </div>
-            <UButton to="/dashboard/product/new" icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
-        </div>
-
-        <UTable :loading="status !== 'success'" :data="products" :columns="columns" class="flex-1" />
-    </div>
-    <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
-</template>
-
 <script setup lang="ts">
+/**
+ * █ [PAGE] :: DASHBOARD_PRODUCTS_LIST
+ * =====================================================================
+ * DESC:   List all products with pagination and actions.
+ * PATH:   /dashboard/products
+ * META:   - Fetches paginated products
+ *         - Displays table with custom cells (Image, Name, Price, Tags)
+ * STATUS: STABLE
+ * =====================================================================
+ */
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
+
+// =============================================================================
+// █ CORE / DEPENDENCIES
+// =============================================================================
 const UBadge = resolveComponent('UBadge');
 const NuxtLink = resolveComponent('NuxtLink');
 
+// =============================================================================
+// █ DATA FETCHING
+// =============================================================================
 const { products, total, currentPage, perPage, status } = await usePaginatedProducts();
+
+// =============================================================================
+// █ PAGE META
+// =============================================================================
 definePageMeta({
     breadcrumbName: 'Productos',
     icon: 'i-lucide-box',
 })
 
-
-
-
+// =============================================================================
+// █ TABLE CONFIGURATION
+// =============================================================================
 const columns: TableColumn<Product>[] = [
     {
         accessorKey: 'id',
         header: '#',
         cell: ({ row }) => `#${row.getValue('id')}`,
     },
-
-
     {
         accessorKey: 'images',
         header: 'Imagen',
@@ -118,3 +117,35 @@ const columns: TableColumn<Product>[] = [
     },
 ];
 </script>
+
+<template>
+    <!-- ======================================================================= -->
+    <!-- █ PAGE: DASHBOARD_PRODUCTS_LIST -->
+    <!-- ======================================================================= -->
+    <div class="space-y-6">
+        <!-- =================================================================== -->
+        <!-- █ HEADER -->
+        <!-- =================================================================== -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    Productos
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">
+                    Gestiona y organiza tu catálogo de productos
+                </p>
+            </div>
+            <UButton to="/dashboard/product/new" icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- █ TABLE -->
+        <!-- =================================================================== -->
+        <UTable :loading="status !== 'success'" :data="products" :columns="columns" class="flex-1" />
+
+        <!-- =================================================================== -->
+        <!-- █ PAGINATION -->
+        <!-- =================================================================== -->
+        <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
+    </div>
+</template>

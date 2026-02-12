@@ -10,6 +10,15 @@ const bodySchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
+/**
+ * █ [API] :: ADMIN_PRODUCT_CREATE
+ * =====================================================================
+ * DESC:   Create new product.
+ * META:   - Basic creation logic
+ *         - Use PATCH endpoint for file uploads
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, bodySchema.parse);
 

@@ -1,6 +1,17 @@
 import prisma from "~~/lib/prisma";
 import { z } from "zod";
 
+/**
+ * █ [API] :: ADMIN_PRODUCT_UPDATE
+ * =====================================================================
+ * DESC:   Update existing product (with file upload).
+ * META:   - Handles multipart/form-data
+ *         - Parses JSON data field manually
+ *         - Uploads files to cloud
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 interface FileData {
   name: string;
   type: string;
@@ -17,6 +28,9 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
+  // ===========================================================================
+  // █ PARAMS & MULTIPART
+  // ===========================================================================
   const id = getRouterParam(event, "id") as string;
   const formData = await readMultipartFormData(event);
   const files: FileData[] = [];
@@ -29,6 +43,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // ===========================================================================
+  // █ FILE PROCESSING
+  // ===========================================================================
   //Procesar los archivos
   console.log({ formData });
 
@@ -49,6 +66,9 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  // ===========================================================================
+  // █ JSON PARSING
+  // ===========================================================================
   const body = bodySchema.safeParse(JSON.parse(dataString));
 
   if (!body.success) {
@@ -60,6 +80,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // ===========================================================================
+  // █ PRODUCT CHECK
+  // ===========================================================================
   //Confirmar que el producto exista
   const product = await prisma.product.findUnique({
     where: {
@@ -74,6 +97,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // ===========================================================================
+  // █ CLOUD UPLOAD
+  // ===========================================================================
   // Enviar los archivos al Cloud
   if (files.length > 0) {
     const uploadFiles = await Promise.all(
@@ -86,6 +112,9 @@ export default defineEventHandler(async (event) => {
     //body.data.images = body.data.images.concat(uploadFiles)
   }
 
+  // ===========================================================================
+  // █ DB UPDATE
+  // ===========================================================================
   const updateProduct = await prisma.product.update({
     where: {
       id: +id,
@@ -93,6 +122,9 @@ export default defineEventHandler(async (event) => {
     data: body.data,
   });
 
+  // ===========================================================================
+  // █ RESPONSE
+  // ===========================================================================
   return {
     message: "Producto actualizado correctamente",
     product: updateProduct,

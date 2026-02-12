@@ -1,5 +1,18 @@
-import { UPageSection } from '../../../.nuxt/components';
 <script setup lang="ts">
+/**
+ * █ [HOME] :: FEATURES
+ * =====================================================================
+ * DESC:   Features grid section for the home page.
+ *         Displays cards with icon, title, description and optional image.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
+
+
+// =============================================================================
+// █ CONFIG: CARDS DATA
+// =============================================================================
 const cards = ref([
     {
         title: 'Tema',
@@ -42,6 +55,9 @@ const cards = ref([
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: FEATURES -->
+    <!-- ======================================================================= -->
     <UPageSection title="Características" description="Explora las características principales de Nuxt UI"
         headline="Características" />
     <UPageGrid>

@@ -1,5 +1,16 @@
 <script setup lang="ts">
+/**
+ * █ [HOME] :: TESTIMONIALS
+ * =====================================================================
+ * DESC:   Testimonials section using masonry layout.
+ *         Fetches reviews from API.
+ * STATUS: STABLE
+ * =====================================================================
+ */
 
+// =============================================================================
+// █ CORE: DATA FETCHING & TRANSFORMATION
+// =============================================================================
 const { data } = await useFetch('/api/home/reviews')
 const testimonials = computed(() => {
     if (!data.value) return []
@@ -19,6 +30,9 @@ const testimonials = computed(() => {
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: TESTIMONIALS -->
+    <!-- ======================================================================= -->
     <UPageSection title="Testimonios" description="Nuestros testimonios de clientes satisfechos"
         headline="Testimonios" />
     <UPageColumns>

@@ -1,5 +1,20 @@
 <script lang="ts" setup>
+/**
+ * █ [PAGE] :: DASHBOARD_PRODUCT_DETAIL
+ * =====================================================================
+ * DESC:   Create or Edit a product.
+ * PATH:   /dashboard/product/:id
+ * META:   - Validates form data (slug, name, description, price)
+ *         - Handle image uploads
+ *         - Create/Update logic via useAdminProduct
+ * STATUS: STABLE
+ * =====================================================================
+ */
 import { z } from 'zod';
+
+// =============================================================================
+// █ CORE / DEPENDENCIES
+// =============================================================================
 
 const router = useRouter();
 const route = useRoute();
@@ -17,7 +32,9 @@ if (messageQuery) {
   router.replace({ query: {} });
 }
 
-// Variables
+// =============================================================================
+// █ DATA FETCHING
+// =============================================================================
 const rawId = route.params.id as string;
 
 const {
@@ -31,6 +48,9 @@ if (error.value) {
   await navigateTo('/404');
 }
 
+// =============================================================================
+// █ STATE & COMPUTED
+// =============================================================================
 const isCreating = computed(() => rawId === 'new');
 
 const newProduct = ref<Product | null>({ ...product.value } as Product);
@@ -47,6 +67,9 @@ const subtitle = computed(() =>
     : 'Actualiza la in formación del producto seleccionado'
 );
 
+// =============================================================================
+// █ VALIDATION CONFIG
+// =============================================================================
 const productSchema = z.object({
   slug: z.string().nonempty('El Slug es requerido'),
   name: z.string().nonempty('El nombre es requerido'),
@@ -54,6 +77,9 @@ const productSchema = z.object({
   price: z.number().min(0, 'El precio es requerido'),
 });
 
+// =============================================================================
+// █ INTERACTION HANDLERS
+// =============================================================================
 const checkValidations = () => {
   fieldErrors.value = {};
 
@@ -137,6 +163,9 @@ const removeFilePreview = (index: number) => {
   filesToUpload.value = filesToUpload.value.filter((file, i) => i !== index);
 };
 
+// =============================================================================
+// █ WATCHERS
+// =============================================================================
 watch(
   newProduct,
   () => {
@@ -149,6 +178,9 @@ watch(
 </script>
 
 <template>
+  <!-- ======================================================================= -->
+  <!-- █ PAGE: DASHBOARD_PRODUCT_DETAIL -->
+  <!-- ======================================================================= -->
   <div class="mx-auto max-w-4xl space-y-8">
     <section class="space-y-1">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-white">

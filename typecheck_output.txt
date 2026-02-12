@@ -1,0 +1,25 @@
+npm warn Unknown project config "shamefully-hoist". This will stop working in the next major version of npm.
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 2 collections: lucide, simple-icons
+npm warn Unknown env config "shamefully-hoist". This will stop working in the next major version of npm.
+npm warn Unknown project config "shamefully-hoist". This will stop working in the next major version of npm.
+server/api/home/reviews.get.ts(13,32): error TS2551: Property 'siteReviews' does not exist on type 'PrismaClient<never, GlobalOmitConfig | undefined, DefaultArgs>'. Did you mean 'siteReview'?
+server/api/product/[slug].get.ts(12,43): error TS2559: Type '"slug"' has no properties in common with type '{ decode?: boolean | undefined; }'.
+server/api/product/[slug]/suggestions.get.ts(13,43): error TS2559: Type '"slug"' has no properties in common with type '{ decode?: boolean | undefined; }'.
+server/api/home/reviews.get.ts(13,32): error TS2551: Property 'siteReviews' does not exist on type 'PrismaClient<never, GlobalOmitConfig | undefined, DefaultArgs>'. Did you mean 'siteReview'?
+server/api/product/[slug].get.ts(12,43): error TS2559: Type '"slug"' has no properties in common with type '{ decode?: boolean | undefined; }'.
+server/api/product/[slug]/suggestions.get.ts(13,43): error TS2559: Type '"slug"' has no properties in common with type '{ decode?: boolean | undefined; }'.
+
+ ERROR  Process exited with non-zero status (2)
+
+    at G._waitForOutput (node_modules/tinyexec/dist/main.js:574:92)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.run (node_modules/@nuxt/cli/dist/typecheck-B-jIcMjP.mjs:66:3)
+    at async runCommand (node_modules/citty/dist/index.mjs:316:16)
+    at async runCommand (node_modules/citty/dist/index.mjs:307:11)
+    at async runMain (node_modules/citty/dist/index.mjs:445:7) 
+
+
+
+ ERROR  Process exited with non-zero status (2)
+

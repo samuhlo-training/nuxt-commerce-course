@@ -1,5 +1,14 @@
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: PRODUCT_LIST
+ * =====================================================================
+ * DESC:   Fetch products with pagination.
+ * META:   - Query params: limit, offset
+ *         - Returns products + pagination metadata
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   let limit = parseInt(query.limit as string);

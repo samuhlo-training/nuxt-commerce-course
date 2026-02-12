@@ -1,23 +1,48 @@
 <script setup lang="ts">
+/**
+ * █ [PAGE] :: LOGIN
+ * =====================================================================
+ * DESC:   Login page with email/password and social providers.
+ * PATH:   /login
+ * META:   - Uses 'login-layout'
+ *         - Redirects if already authenticated
+ * STATUS: STABLE
+ * =====================================================================
+ */
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 
+// =============================================================================
+// █ PAGE META
+// =============================================================================
 definePageMeta({
     layout: 'login-layout',
     middleware: 'not-athenticated'
 })
 
+// =============================================================================
+// █ CORE / DEPENDENCIES
+// =============================================================================
 const toast = useToast()
+// =============================================================================
+// █ STATE
+// =============================================================================
 const cookieLoginEmail = useCookie<string | null>('loginEmail', {
     sameSite: 'strict',
     maxAge: 60 * 60 * 24 * 30, // 30 dias    
 })
 
+// =============================================================================
+// █ AUTHENTICATION
+// =============================================================================
 const {login} = useAuthentication()
 const isPosting = ref(false)
 
 
+// =============================================================================
+// █ FORM CONFIGURATION
+// =============================================================================
 const fields: AuthFormField[] = [{
     name: 'email',
     type: 'email',
@@ -52,6 +77,9 @@ const providers = [{
     }
 }]
 
+// =============================================================================
+// █ VALIDATION SCHEMA
+// =============================================================================
 const schema = z.object({
     email: z.email('Correo electrónico inválido'),
     password: z.string('La contraseña es requerida').min(8, 'Debe tener al menos 8 caracteres'),
@@ -60,6 +88,9 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
+// =============================================================================
+// █ INTERACTION HANDLERS
+// =============================================================================
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
     const {email, password, remember} = payload.data
     isPosting.value = true
@@ -80,6 +111,9 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ PAGE: LOGIN -->
+    <!-- ======================================================================= -->
     <div class="flex flex-col items-center justify-center gap-4 p-4">
         <UPageCard class="w-full max-w-md">
             <UAuthForm :schema="schema" title="Iniciar sesión"

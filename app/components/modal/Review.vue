@@ -1,8 +1,20 @@
 <script setup lang="ts">
+/**
+ * █ [MODAL] :: PRODUCT_REVIEW
+ * =====================================================================
+ * DESC:   Modal to submit a product review.
+ *         Handles user input for rating and text.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 import type { User } from '#auth-utils';
 import type { ProductReview } from '../../../prisma/generated/prisma/browser';
 
 
+// =============================================================================
+// █ CORE: PROPS & EMITS
+// =============================================================================
 const props = defineProps<{
     buttonLabel: string;
     slug: string;
@@ -13,6 +25,9 @@ const emit = defineEmits<{
     (e: 'review-posted', review: ProductReview): void;
 }>();
 
+// =============================================================================
+// █ CORE: COMPOSABLE LOGIC
+// =============================================================================
 const {
     isOpen,
     reviewText,
@@ -22,6 +37,9 @@ const {
     submitReview: submitReviewApi
 } = useModalReview();
 
+// =============================================================================
+// █ INTERACTION: HANDLERS
+// =============================================================================
 const submitReview = async () => {
     const review = await submitReviewApi(props.slug);
     if (review) {
@@ -31,6 +49,9 @@ const submitReview = async () => {
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: REVIEW MODAL -->
+    <!-- ======================================================================= -->
     <UButton :label="buttonLabel" color="primary" variant="subtle" @click="isOpen = true" />
 
     <UModal v-model:open="isOpen" :dismissible="true" @update:open="handleModalClose" title="Añadir reseña"
@@ -38,10 +59,17 @@ const submitReview = async () => {
 
         <template #content>
             <UContainer class="max-w-2xl mx-auto p-4">
+                <!-- ------------------------------------------------------------------- -->
+                <!-- █ SECTION: HEADER -->
+                <!-- ------------------------------------------------------------------- -->
                 <h2 class="text-xl font-semibold">Añadir reseña</h2>
                 <p class="text-gray-600 text-sm mb-5">
                     Deja tu reseña sobre el producto.
                 </p>
+
+                <!-- ------------------------------------------------------------------- -->
+                <!-- █ SECTION: FORM -->
+                <!-- ------------------------------------------------------------------- -->
                 <form class="grid grid-cols-1 gap-4 mb-5">
                     <input type="hidden" v-model="rating" />
 

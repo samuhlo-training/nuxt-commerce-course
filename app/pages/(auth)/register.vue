@@ -1,15 +1,34 @@
 <script setup lang="ts">
+/**
+ * █ [PAGE] :: REGISTER
+ * =====================================================================
+ * DESC:   User registration page.
+ * PATH:   /register
+ * META:   - Uses 'login-layout'
+ *         - Redirects if already authenticated
+ * STATUS: STABLE
+ * =====================================================================
+ */
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 
+// =============================================================================
+// █ PAGE META
+// =============================================================================
 definePageMeta({
     layout: 'login-layout',
     middleware: 'not-athenticated'
 })
 
+// =============================================================================
+// █ CORE / DEPENDENCIES
+// =============================================================================
 const toast = useToast()
 
+// =============================================================================
+// █ FORM CONFIGURATION
+// =============================================================================
 const fields: AuthFormField[] = [
     {
         name: 'name',
@@ -39,6 +58,9 @@ const fields: AuthFormField[] = [
     }]
 
 
+// =============================================================================
+// █ VALIDATION SCHEMA
+// =============================================================================
 const schema = z.object({
     name: z.string('El nombre es requerido').min(2, 'Debe tener al menos 2 caracteres'),
     email: z.email('Correo electrónico inválido'),
@@ -51,12 +73,18 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
+// =============================================================================
+// █ INTERACTION HANDLERS
+// =============================================================================
 function onSubmit(payload: FormSubmitEvent<Schema>) {
     console.log('Registro submitted', payload)
 }
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ PAGE: REGISTER -->
+    <!-- ======================================================================= -->
     <div class="flex flex-col items-center justify-center gap-4 p-4">
         <UPageCard class="w-full max-w-md">
             <UAuthForm :schema="schema" title="Registrarse"

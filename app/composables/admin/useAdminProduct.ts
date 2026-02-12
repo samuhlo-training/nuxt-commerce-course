@@ -1,7 +1,23 @@
+/**
+ * █ [COMPOSABLE] :: ADMIN_PRODUCT
+ * =====================================================================
+ * DESC:   Manages admin product data and operations.
+ * META:   - Fetches product details
+ *         - Handles create/update logic (merged)
+ *         - Manages file uploads within formData
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export const useAdminProduct = async (id: string) => {
+  // ===========================================================================
+  // █ DATA FETCHING
+  // ===========================================================================
   const { data, error, status, execute, refresh, pending } = await useFetch(
     `/api/admin/product/${id}`,
   );
+  // ===========================================================================
+  // █ ACTIONS
+  // ===========================================================================
   const createOrUpdate = async (data: Partial<Product>, files?: File[]) => {
     const isCreating = data.id === 0;
 
@@ -36,6 +52,9 @@ export const useAdminProduct = async (id: string) => {
     }
   };
 
+  // ===========================================================================
+  // █ EXPOSE
+  // ===========================================================================
   return {
     data,
     error,

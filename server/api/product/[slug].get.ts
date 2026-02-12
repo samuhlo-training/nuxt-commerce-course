@@ -1,7 +1,15 @@
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: PRODUCT_DETAIL
+ * =====================================================================
+ * DESC:   Get product details by slug.
+ * META:   - Handles 404
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
-  const { slug } = getRouterParams(event, "slug");
+  const slug = getRouterParam(event, "slug");
 
   const product = await prisma.product.findUnique({
     where: { slug },

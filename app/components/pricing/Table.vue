@@ -1,4 +1,16 @@
 <script setup lang="ts">
+/**
+ * █ [PRICING] :: TABLE
+ * =====================================================================
+ * DESC:   Pricing table component.
+ *         Displays plans, features and comparisons.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
+// =============================================================================
+// █ CONFIG: TIERS
+// =============================================================================
 const tiers = [
     {
         id: 'solo',
@@ -25,6 +37,10 @@ const tiers = [
         button: { label: 'Contactar ventas', color: 'neutral' as const },
     },
 ];
+
+// =============================================================================
+// █ CONFIG: SECTIONS & FEATURES
+// =============================================================================
 const sections = [
     {
         id: 'features',
@@ -53,6 +69,10 @@ const sections = [
         ],
     },
 ];
+
+// =============================================================================
+// █ CONFIG: PLANS
+// =============================================================================
 const plans = ref([
     {
         title: 'Individual',
@@ -85,6 +105,9 @@ const plans = ref([
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: PRICING TABLE -->
+    <!-- ======================================================================= -->
     <UPricingTable :tiers="tiers" :sections="sections">
         <!-- Personalizar el título de un nivel específico -->
         <template #team-title="{ tier }">

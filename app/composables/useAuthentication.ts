@@ -1,6 +1,21 @@
+/**
+ * █ [COMPOSABLE] :: AUTHENTICATION
+ * =====================================================================
+ * DESC:   Manages user authentication session.
+ * META:   - Wrapping h3/auth session management
+ *         - Provides login, register, logout actions
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export const useAuthentication = () => {
+  // ===========================================================================
+  // █ STATE & DEPENDENCIES
+  // ===========================================================================
   const { user, session, loggedIn, clear, fetch } = useUserSession();
 
+  // ===========================================================================
+  // █ ACTIONS
+  // ===========================================================================
   const login = async (email: string, password: string) => {
     try {
       const { user, message } = await $fetch("/api/auth/login", {
@@ -32,6 +47,9 @@ export const useAuthentication = () => {
     navigateTo("/");
   };
 
+  // ===========================================================================
+  // █ EXPOSE
+  // ===========================================================================
   return {
     user,
     session,

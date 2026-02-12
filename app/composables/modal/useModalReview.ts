@@ -1,12 +1,31 @@
 import type { ProductReview } from "../../../prisma/generated/prisma/browser";
 
+/**
+ * █ [COMPOSABLE] :: MODAL_REVIEW
+ * =====================================================================
+ * DESC:   Manages state for product review modal.
+ * META:   - Handles modal visibility (isOpen)
+ *         - Form state (rating, reviewText, userTitle)
+ *         - Submits review to API
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export const useModalReview = () => {
+  // ===========================================================================
+  // █ DEPENDENCIES
+  // ===========================================================================
   const toast = useToast();
+  // ===========================================================================
+  // █ STATE
+  // ===========================================================================
   const isOpen = ref(false);
   const reviewText = ref("");
   const userTitle = ref("");
   const rating = ref(0);
 
+  // ===========================================================================
+  // █ ACTIONS
+  // ===========================================================================
   const resetForm = () => {
     reviewText.value = "";
     rating.value = 0;
@@ -56,6 +75,9 @@ export const useModalReview = () => {
     }
   };
 
+  // ===========================================================================
+  // █ EXPOSE
+  // ===========================================================================
   return {
     isOpen,
     reviewText,

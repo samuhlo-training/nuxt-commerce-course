@@ -1,10 +1,27 @@
 <script setup lang="ts">
-const {user} = useAuthentication()
+/**
+ * █ [DASHBOARD] :: SIDEBAR
+ * =====================================================================
+ * DESC:   Sidebar navigation for the dashboard.
+ *         Supports collapsible state and search functionality.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 import {
     type CommandPaletteGroup,
     type CommandPaletteItem,
     type NavigationMenuItem,
 } from '@nuxt/ui';
+
+// =============================================================================
+// █ CORE: STATE
+// =============================================================================
+const { user } = useAuthentication();
+
+// =============================================================================
+// █ CONFIG: NAVIGATION ITEMS
+// =============================================================================
 const items: NavigationMenuItem[][] = [
     [
         {
@@ -56,6 +73,10 @@ const items: NavigationMenuItem[][] = [
         },
     ],
 ];
+
+// =============================================================================
+// █ CONFIG: SEARCH
+// =============================================================================
 const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
     {
         label: 'Productos',
@@ -74,36 +95,29 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: SIDEBAR -->
+    <!-- ======================================================================= -->
     <UDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-default' }">
+        
+        <!-- ------------------------------------------------------------------- -->
+        <!-- █ SLOT: HEADER -->
+        <!-- ------------------------------------------------------------------- -->
         <template #header="{ collapsed }" class="flex items-center gap-2">
             <NuxtLink to="/" class="flex flex-row items-center justify-center">
-
                 <UDashboardSidebarCollapse variant="subtle" class="mr-2" />
                 <IconsNuxtui class="h-6 w-auto" v-if="!collapsed" />
             </NuxtLink>
         </template>
 
+        <!-- ------------------------------------------------------------------- -->
+        <!-- █ SLOT: DEFAULT (CONTENT) -->
+        <!-- ------------------------------------------------------------------- -->
         <template #default="{ collapsed }">
             <UDashboardSearchButton />
             <UDashboardSearch title="Buscar" :groups="searchGroups" />
-            <!-- <UButton
-        :label="collapsed ? undefined : 'Search...'"
-        icon="i-lucide-search"
-        color="neutral"
-        variant="outline"
-        block
-        :square="collapsed"
-      >
-        <template v-if="!collapsed" #trailing>
-          <div class="flex items-center gap-0.5 ms-auto">
-            <UKbd value="meta" variant="subtle" />
-            <UKbd value="K" variant="subtle" />
-          </div>
-        </template>
-</UButton> -->
-
+            
             <UNavigationMenu :collapsed="collapsed" :items="items[0]" orientation="vertical" />
-
             <UNavigationMenu :collapsed="collapsed" :items="items[1]" orientation="vertical" class="mt-auto" />
 
             <div class="">
@@ -112,6 +126,9 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
             </div>
         </template>
 
+        <!-- ------------------------------------------------------------------- -->
+        <!-- █ SLOT: FOOTER -->
+        <!-- ------------------------------------------------------------------- -->
         <template #footer="{ collapsed }">
             <UButton :avatar="{
                 src: 'https://github.com/benjamincanac.png',

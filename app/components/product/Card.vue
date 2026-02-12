@@ -1,10 +1,21 @@
 <script setup lang="ts">
+/**
+ * █ [PRODUCT] :: CARD
+ * =====================================================================
+ * DESC:   Single product card display.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 defineProps<{
     product: Product;
 }>();
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: PRODUCT_CARD -->
+    <!-- ======================================================================= -->
     <UCard class="w-full" :ui="{ body: 'px-20' }">
         <img :src="product.images[0]" alt="Product Image" class="w-full h-52 object-cover rounded-md" />
 

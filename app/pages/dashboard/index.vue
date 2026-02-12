@@ -1,12 +1,30 @@
 <script setup lang="ts">
+/**
+ * █ [PAGE] :: DASHBOARD_INDEX
+ * =====================================================================
+ * DESC:   Main dashboard overview page.
+ * PATH:   /dashboard
+ * META:   - Breadcrumb: Dashboard
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
+// =============================================================================
+// █ PAGE META
+// =============================================================================
 definePageMeta({
     breadcrumbName: 'Dashboard',
     icon: 'i-lucide-layout-dashboard',
 })
 </script>
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ PAGE: DASHBOARD_INDEX -->
+    <!-- ======================================================================= -->
     <div class="space-y-6">
-        <!-- Header -->
+        <!-- =================================================================== -->
+        <!-- █ HEADER -->
+        <!-- =================================================================== -->
         <div>
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
                 Bienvenido a tu Dashboard
@@ -16,7 +34,9 @@ definePageMeta({
             </p>
         </div>
 
-        <!-- Statistics Cards -->
+        <!-- =================================================================== -->
+        <!-- █ STATISTICS CARDS -->
+        <!-- =================================================================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <UCard>
                 <template #header>
@@ -99,7 +119,9 @@ definePageMeta({
             </UCard>
         </div>
 
-        <!-- Recent Activities Section -->
+        <!-- =================================================================== -->
+        <!-- █ RECENT ACTIVITIES -->
+        <!-- =================================================================== -->
         <UCard>
             <template #header>
                 <div class="flex items-center justify-between">

@@ -1,9 +1,21 @@
-import { NuxtLink } from '../../.nuxt/components';
+<script setup lang="ts">
+/**
+ * █ [SHARED] :: MAIN_NAVIGATION
+ * =====================================================================
+ * DESC:   Main navigation bar for the application.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+</script>
+
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: MAIN_NAVIGATION -->
+    <!-- ======================================================================= -->
     <nav>
         <ul>
             <li><NuxtLink to="/">Home</NuxtLink></li>
-            <li><NuxtLink :to="{ path: 'about' }">About</NuxtLink></li>
+            <li><NuxtLink :to="{ name: 'about' }">About</NuxtLink></li>
             <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
             <li><NuxtLink to="/products">Products</NuxtLink></li>
             <li><NuxtLink to="/contact">Contact</NuxtLink></li>

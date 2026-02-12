@@ -1,7 +1,24 @@
 <script setup lang="ts">
+/**
+ * █ [PAGE] :: PRODUCT_DETAIL_PUBLIC
+ * =====================================================================
+ * DESC:   Public product detail view.
+ * PATH:   /product/:slug
+ * META:   - Fetches product by slug using useProduct
+ *         - Handle 404 if product not found
+ *         - Image gallery and quantity selector
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
+// =============================================================================
+// █ CORE / DEPENDENCIES
+// =============================================================================
 const route = useRoute();
 const slug = route.params.slug as string;
-// Simulación de productos - en producción esto vendría de una API
+// =============================================================================
+// █ DATA FETCHING
+// =============================================================================
 const { product } = await useProduct(slug);
 
 // const products = ref<Product[]>([]);
@@ -9,7 +26,9 @@ const { product } = await useProduct(slug);
 
 
 
-// Si no se encuentra el producto, mostrar error 404
+// =============================================================================
+// █ ERROR HANDLING
+// =============================================================================
 if (!product.value) {
     navigateTo('/404');
     // throw createError({
@@ -17,9 +36,10 @@ if (!product.value) {
     //     statusMessage: 'Producto no encontrado',
     // });
 }
-// Estado para la imagen seleccionada
+// =============================================================================
+// █ STATE & INTERACTION
+// =============================================================================
 const selectedImageIndex = ref(0);
-// Estado para cantidad
 const quantity = ref(1);
 const increaseQuantity = () => {
     quantity.value++;
@@ -29,20 +49,30 @@ const decreaseQuantity = () => {
         quantity.value--;
     }
 };
+// =============================================================================
+// █ COMPUTED
+// =============================================================================
 const totalPrice = computed(() => {
     return (product.value?.price || 0) * quantity.value;
 });
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ PAGE: PRODUCT_DETAIL_PUBLIC -->
+    <!-- ======================================================================= -->
     <div v-if="product" class="container mx-auto px-4 py-8">
-        <!-- Breadcrumb -->
+        <!-- =================================================================== -->
+        <!-- █ BREADCRUMB -->
+        <!-- =================================================================== -->
         <UBreadcrumb class="mb-8" :items="[
             { label: 'Productos', to: '/products' },
             { label: product.name, to: `/product/${product.slug}` },
         ]" />
 
-        <!-- Product Detail -->
+        <!-- =================================================================== -->
+        <!-- █ PRODUCT DETAIL -->
+        <!-- =================================================================== -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Images Section -->
             <div class="space-y-4">
@@ -122,10 +152,14 @@ const totalPrice = computed(() => {
         <!-- <USeparator class="h-[3000px]" /> -->
         <USeparator class="my-10" icon="i-lucide-box" />
 
-        <!-- Reviews -->
+        <!-- =================================================================== -->
+        <!-- █ REVIEWS -->
+        <!-- =================================================================== -->
         <LazyProductReviews hydrate-on-visible :slug="slug" />
 
-        <!-- Related Products Section (optional) -->
+        <!-- =================================================================== -->
+        <!-- █ RELATED PRODUCTS -->
+        <!-- =================================================================== -->
         <div v-if="product" class="mt-16 items-center">
             <h2 class="text-2xl font-bold text-gray-500 mb-6">
                 Productos relacionados

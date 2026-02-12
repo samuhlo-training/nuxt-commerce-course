@@ -1,12 +1,24 @@
 <script setup lang="ts">
+/**
+ * █ [SHARED] :: HEADER
+ * =====================================================================
+ * DESC:   Main application header.
+ *         Handles responsive navigation and user authentication state.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+// =============================================================================
+// █ CORE: DEPENDENCIES & STATE
+// =============================================================================
 const route = useRoute();
-const {isLoggedIn,logout,isAdmin} = useAuthentication();
+const { isLoggedIn, logout, isAdmin } = useAuthentication();
 
-
-
-
+// =============================================================================
+// █ CONFIG: NAVIGATION
+// =============================================================================
 const items = computed<NavigationMenuItem[]>(() => [{
     label: 'Productos',
     to: '/products',
@@ -41,6 +53,9 @@ const responsiveMenu = ref([
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: HEADER -->
+    <!-- ======================================================================= -->
     <UHeader>
         <template #title>
             <IconsNuxtui class="h-6 w-auto" />
@@ -52,16 +67,15 @@ const responsiveMenu = ref([
 
         <template #right>
             <ClientOnly>
-            <UColorModeButton />
+                <UColorModeButton />
 
-            <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-                <UButton color="neutral" variant="ghost" to="https://github.com/nuxt/ui" target="_blank"
-                    icon="i-simple-icons-github" aria-label="GitHub" />
-            </UTooltip>
-                <UButton v-if="!isLoggedIn" icon="i-heroicons-user-circle" size="lg" color="primary" variant="solid" to="/login"
-                    label="Login" />
-                    <UButton v-else icon="i-heroicons-user-circle"  variant="ghost" 
-                    label="Cerrarr sesion" @click="logout" />
+                <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+                    <UButton color="neutral" variant="ghost" to="https://github.com/nuxt/ui" target="_blank"
+                        icon="i-simple-icons-github" aria-label="GitHub" />
+                </UTooltip>
+                <UButton v-if="!isLoggedIn" icon="i-heroicons-user-circle" size="lg" color="primary" variant="solid"
+                    to="/login" label="Login" />
+                <UButton v-else icon="i-heroicons-user-circle" variant="ghost" label="Cerrarr sesion" @click="logout" />
             </ClientOnly>
 
         </template>

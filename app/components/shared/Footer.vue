@@ -1,6 +1,17 @@
 <script setup lang="ts">
+/**
+ * █ [SHARED] :: FOOTER
+ * =====================================================================
+ * DESC:   Application footer with navigation links and social icons.
+ * STATUS: STABLE
+ * =====================================================================
+ */
+
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+// =============================================================================
+// █ CONFIG: FOOTER LINKS
+// =============================================================================
 const items: NavigationMenuItem[] = [{
     label: 'Figma Kit',
     to: 'https://go.nuxt.com/figma-ui',
@@ -17,6 +28,9 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
+    <!-- ======================================================================= -->
+    <!-- █ COMPONENT: FOOTER -->
+    <!-- ======================================================================= -->
     <USeparator icon="i-simple-icons-nuxtdotjs" type="solid" class="h-px" />
     <UFooter>
         <template #left>

@@ -1,5 +1,13 @@
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: ADMIN_PRODUCT_DETAIL
+ * =====================================================================
+ * DESC:   Get product for admin editing.
+ * META:   - Special handling for id="new" (returns empty template)
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id") as string;
 

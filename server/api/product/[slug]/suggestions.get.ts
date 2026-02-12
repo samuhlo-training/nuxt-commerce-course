@@ -1,7 +1,16 @@
 import prisma from "~~/lib/prisma";
 
+/**
+ * █ [API] :: PRODUCT_SUGGESTIONS
+ * =====================================================================
+ * DESC:   Get related products based on tags.
+ * META:   - Excludes current product
+ *         - DEMO DELAY included for skeleton visualization
+ * STATUS: STABLE
+ * =====================================================================
+ */
 export default defineEventHandler(async (event) => {
-  const { slug } = getRouterParams(event, "slug");
+  const slug = getRouterParam(event, "slug");
 
   const product = await prisma.product.findUnique({
     where: { slug },
